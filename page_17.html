@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Comparativo Consolidado - Branching</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .comparison-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 6px 10px;
+        }
+        .comparison-table th {
+            background-color: #19747E;
+            color: white;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .comparison-table tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        .highlight-github {
+            background-color: rgba(25, 116, 126, 0.2);
+            font-weight: bold;
+        }
+        .highlight-gitflow {
+            background-color: rgba(144, 238, 144, 0.2);
+            font-weight: bold;
+        }
+        .chart-container {
+            height: 150px;
+            width: 100%;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide p-6 flex flex-col" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-4">
+<div class="header-line mb-3"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-1">Comparativo Consolidado - Branching</h1>
+</div>
+<!-- Main Content -->
+<div class="flex-grow">
+<!-- Comparison Table -->
+<table class="comparison-table w-full mb-4">
+<thead>
+<tr>
+<th class="text-left">Ranking</th>
+<th class="text-center">Modelo 1<br/><span class="text-sm font-normal">[-7.00; -3.51]</span></th>
+<th class="text-center">Modelo 2<br/><span class="text-sm font-normal">[0.61; 0.68]</span></th>
+<th class="text-center">Modelo 3<br/><span class="text-sm font-normal">[0.08; 0.53]</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="font-semibold">1º</td>
+<td class="text-center highlight-gitflow">Gitflow<br/><span class="text-red-600">-3.5156</span></td>
+<td class="text-center highlight-github">GitHub Flow<br/><span class="text-green-600">0.6881</span></td>
+<td class="text-center highlight-github">GitHub Flow<br/><span class="text-green-600">0.5341</span></td>
+</tr>
+<tr>
+<td class="font-semibold">2º</td>
+<td class="text-center">GitLab Flow<br/><span class="text-red-600">-4.4922</span></td>
+<td class="text-center">GitLab Flow<br/><span class="text-green-600">0.6808</span></td>
+<td class="text-center">Trunk-Based<br/><span class="text-green-600">0.2828</span></td>
+</tr>
+<tr>
+<td class="font-semibold">3º</td>
+<td class="text-center">GitHub Flow<br/><span class="text-red-600">-5.0820</span></td>
+<td class="text-center">Gitflow<br/><span class="text-green-600">0.6574</span></td>
+<td class="text-center">Gitflow<br/><span class="text-green-600">0.1507</span></td>
+</tr>
+<tr>
+<td class="font-semibold">4º</td>
+<td class="text-center">Trunk-Based<br/><span class="text-red-600">-7.0039</span></td>
+<td class="text-center">Trunk-Based<br/><span class="text-green-600">0.6162</span></td>
+<td class="text-center">GitLab Flow<br/><span class="text-green-600">0.0867</span></td>
+</tr>
+</tbody>
+</table>
+<!-- Analysis Section -->
+<div class="bg-white bg-opacity-70 p-3 rounded-lg shadow-sm">
+<h3 class="text-xl font-semibold mb-1 flex items-center">
+<i class="fas fa-chart-line text-gray-600 mr-2"></i>
+                    Análise Comparativa
+                </h3>
+<ul class="list-disc pl-6 space-y-1">
+<li><span class="font-semibold">Modelo 1 (BAAI)</span>: Gitflow teve o melhor score, mas foi considerado uma alucinação.</li>
+<li><span class="font-semibold">Modelos 2 e 3</span>: GitHub Flow venceu em todos os casos, alinhado à realidade do projeto.</li>
+<li><span class="font-semibold">Consolidação</span>: GitHub Flow aparece como a estratégia dominante nos modelos semânticos.</li>
+</ul>
+</div>
+</div>
+<!-- D3 Visualization -->
+<div class="chart-container mb-3" id="chart"></div>
+<!-- Footer with page number -->
+<div class="mt-1 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">17/24</div>
+</div>
+</div>
+<script>
+        // D3.js visualization
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = [
+                {model: "Modelo 1 (BAAI)", strategy: "Gitflow", score: -3.5156, color: "#19747E"},
+                {model: "Modelo 1 (BAAI)", strategy: "GitLab Flow", score: -4.4922, color: "#19747E"},
+                {model: "Modelo 1 (BAAI)", strategy: "GitHub Flow", score: -5.0820, color: "#19747E"},
+                {model: "Modelo 1 (BAAI)", strategy: "Trunk-Based", score: -7.0039, color: "#19747E"},
+                {model: "Modelo 2 (Qwen)", strategy: "GitHub Flow", score: 0.6881, color: "#4CAF50"},
+                {model: "Modelo 2 (Qwen)", strategy: "GitLab Flow", score: 0.6808, color: "#4CAF50"},
+                {model: "Modelo 2 (Qwen)", strategy: "Gitflow", score: 0.6574, color: "#4CAF50"},
+                {model: "Modelo 2 (Qwen)", strategy: "Trunk-Based", score: 0.6162, color: "#4CAF50"},
+                {model: "Modelo 3 (mDeBERTa)", strategy: "GitHub Flow", score: 0.5341, color: "#2196F3"},
+                {model: "Modelo 3 (mDeBERTa)", strategy: "Trunk-Based", score: 0.2828, color: "#2196F3"},
+                {model: "Modelo 3 (mDeBERTa)", strategy: "Gitflow", score: 0.1507, color: "#2196F3"},
+                {model: "Modelo 3 (mDeBERTa)", strategy: "GitLab Flow", score: 0.0867, color: "#2196F3"}
+            ];
+
+            const margin = {top: 15, right: 30, bottom: 30, left: 50};
+            const width = 1200 - margin.left - margin.right;
+            const height = 150 - margin.top - margin.bottom;
+
+            const svg = d3.select("#chart")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // X scale
+            const x = d3.scaleBand()
+                .domain(data.map(d => d.strategy))
+                .range([0, width])
+                .padding(0.2);
+
+            // Y scale (handling both positive and negative values)
+            const y = d3.scaleLinear()
+                .domain([-8, 1])
+                .range([height, 0]);
+
+            // Add X axis
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x))
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-45)");
+
+            // Add Y axis
+            svg.append("g")
+                .call(d3.axisLeft(y));
+
+            // Add bars
+            svg.selectAll("rect")
+                .data(data)
+                .join("rect")
+                .attr("x", d => x(d.strategy))
+                .attr("y", d => d.score < 0 ? y(0) : y(d.score))
+                .attr("width", x.bandwidth())
+                .attr("height", d => Math.abs(y(d.score) - y(0)))
+                .attr("fill", d => d.color)
+                .attr("opacity", 0.7);
+
+            // Add zero line
+            svg.append("line")
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", y(0))
+                .attr("y2", y(0))
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", "2,2");
+        });
+    </script>
+
+</body></html>

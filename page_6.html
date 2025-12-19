@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modelo 1 - Classificação por Texto</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .info-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-left: 4px solid #19747E;
+            transition: all 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .model-flow {
+            position: relative;
+            height: 100px;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-4">
+<div class="header-line mb-3"></div>
+<h1 class="text-4xl font-bold text-gray-800 mb-2">Modelo 1 - Classificação por Texto</h1>
+<h2 class="text-xl text-gray-700 mb-3">BAAI/bge-reranker-v2-m3</h2>
+</div>
+<!-- Main Content -->
+<div class="flex-grow grid grid-cols-2 gap-5">
+<!-- Left Column -->
+<div class="flex flex-col space-y-3">
+<!-- Model Description -->
+<div class="info-card p-4 rounded-lg">
+<div class="flex items-start">
+<i class="fas fa-robot text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold text-gray-800 mb-1">Sobre o Modelo</h3>
+<p class="text-gray-700">Modelo de classificação por texto para analisar padrões em arquivos do repositório AnythingLLM.</p>
+</div>
+</div>
+</div>
+<!-- Input Data -->
+<div class="info-card p-4 rounded-lg">
+<div class="flex items-start">
+<i class="fas fa-file-code text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold text-gray-800 mb-1">Dados Analisados</h3>
+<ul class="list-disc pl-5 text-gray-700">
+<li>Arquivos brutos do repositório</li>
+<li>branches_overview.txt</li>
+<li>Logs de commits</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column -->
+<div class="flex flex-col space-y-3">
+<!-- How it Works -->
+<div class="info-card p-4 rounded-lg">
+<div class="flex items-start">
+<i class="fas fa-cogs text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold text-gray-800 mb-1">Como Funciona</h3>
+<p class="text-gray-700 mb-1">Utiliza logits negativos para classificação (quanto mais próximo de 0, melhor).</p>
+<p class="text-gray-700">Compara padrões textuais com modelos de branching e release.</p>
+</div>
+</div>
+</div>
+<!-- Visualization -->
+<div class="info-card p-4 rounded-lg">
+<h3 class="text-xl font-semibold text-gray-800 mb-2">Fluxo de Processamento</h3>
+<div class="model-flow bg-white bg-opacity-50 rounded-lg p-3" id="model-flow">
+<!-- D3.js visualization will be placed here -->
+</div>
+</div>
+</div>
+</div>
+<!-- Example of Analysis Result Preview -->
+<div class="mt-4 bg-white bg-opacity-70 p-3 rounded-lg">
+<h3 class="text-lg font-semibold text-gray-800 mb-1">Exemplo de Resultado</h3>
+<div class="flex items-center justify-center">
+<div class="text-sm text-gray-700 mr-6">
+<i class="fas fa-code-branch text-gray-600 mr-2"></i> Gitflow: <span class="font-semibold">-3.5156</span>
+</div>
+<div class="text-sm text-gray-700 mr-6">
+<i class="fas fa-code-branch text-gray-600 mr-2"></i> GitLab Flow: <span class="font-semibold">-4.4922</span>
+</div>
+<div class="text-sm text-gray-700">
+<i class="fas fa-code-branch text-gray-600 mr-2"></i> GitHub Flow: <span class="font-semibold">-5.0820</span>
+</div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-4 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">6/24</div>
+</div>
+</div>
+<script>
+        // D3.js visualization for the model flow
+        document.addEventListener('DOMContentLoaded', function() {
+            const width = document.getElementById('model-flow').clientWidth;
+            const height = document.getElementById('model-flow').clientHeight;
+            
+            const svg = d3.select("#model-flow")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+            
+            // Data for the flow
+            const data = [
+                { x: width * 0.1, y: height/2, icon: "\uf15c", text: "Arquivos" },  // file
+                { x: width * 0.4, y: height/2, icon: "\uf1c0", text: "Modelo" },          // database
+                { x: width * 0.7, y: height/2, icon: "\uf0cb", text: "Ranking" }           // list
+            ];
+            
+            // Arrows between elements
+            svg.append("defs").append("marker")
+                .attr("id", "arrow")
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 8)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M0,-5L10,0L0,5")
+                .attr("fill", "#19747E");
+            
+            // Draw arrows
+            svg.append("line")
+                .attr("x1", width * 0.15)
+                .attr("y1", height/2)
+                .attr("x2", width * 0.35)
+                .attr("y2", height/2)
+                .attr("stroke", "#19747E")
+                .attr("stroke-width", 2)
+                .attr("marker-end", "url(#arrow)");
+            
+            svg.append("line")
+                .attr("x1", width * 0.45)
+                .attr("y1", height/2)
+                .attr("x2", width * 0.65)
+                .attr("y2", height/2)
+                .attr("stroke", "#19747E")
+                .attr("stroke-width", 2)
+                .attr("marker-end", "url(#arrow)");
+            
+            // Add circles with icons
+            const nodes = svg.selectAll("g")
+                .data(data)
+                .enter()
+                .append("g")
+                .attr("transform", d => `translate(${d.x}, ${d.y})`);
+            
+            nodes.append("circle")
+                .attr("r", 22)
+                .attr("fill", "white")
+                .attr("stroke", "#19747E")
+                .attr("stroke-width", 2);
+            
+            nodes.append("text")
+                .attr("font-family", "FontAwesome")
+                .attr("font-size", "18px")
+                .attr("text-anchor", "middle")
+                .attr("dy", "0.3em")
+                .attr("fill", "#19747E")
+                .text(d => d.icon);
+            
+            nodes.append("text")
+                .attr("y", 34)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "11px")
+                .attr("fill", "#333")
+                .text(d => d.text);
+        });
+    </script>
+
+</body></html>

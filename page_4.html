@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Relevância e Arquitetura do Projeto</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .content-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-left: 4px solid #19747E;
+        }
+        .architecture-box {
+            position: relative;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .mono-repo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+        .repo-module {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col">
+<!-- Header -->
+<div class="mb-6">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Relevância e Arquitetura do Projeto</h1>
+</div>
+<!-- Main Content -->
+<div class="flex-grow flex">
+<!-- Relevance Section -->
+<div class="w-1/2 pr-6">
+<div class="content-box p-6 mb-6 h-full flex flex-col justify-center">
+<div class="flex items-center mb-6">
+<div class="bg-green-100 p-4 rounded-full mr-4">
+<i class="fas fa-chart-line text-3xl text-green-700"></i>
+</div>
+<h2 class="text-2xl font-bold text-gray-700">Relevância de Mercado</h2>
+</div>
+<ul class="space-y-4 text-lg">
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+<span>Alta demanda de mercado por agents de IA sem código</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+<span>Integração de LLMs (Large Language Models)</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+<span>Solução &#34;all-in-one&#34; para Desktop e Docker</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+<span>Permite conversar com documentos através de RAG</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Architecture Section -->
+<div class="w-1/2 pl-6">
+<div class="content-box p-6 h-full flex flex-col">
+<div class="flex items-center mb-4">
+<div class="bg-green-100 p-4 rounded-full mr-4">
+<i class="fas fa-code-branch text-3xl text-green-700"></i>
+</div>
+<h2 class="text-2xl font-bold text-gray-700">Arquitetura Monorepo</h2>
+</div>
+<div class="architecture-box flex-grow p-4">
+<div class="mono-repo">
+<!-- Central Node -->
+<div class="repo-module bg-green-600" style="left: 50%; top: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px;">
+<i class="fas fa-code-branch text-3xl mb-2"></i>
+<span>Monorepo</span>
+<span class="text-xs mt-1">anything-llm</span>
+</div>
+<!-- Frontend Module -->
+<div class="repo-module bg-blue-500" style="left: 20%; top: 20%;">
+<i class="fas fa-desktop text-2xl mb-1"></i>
+<span>Frontend</span>
+<span class="text-xs">Interface</span>
+</div>
+<!-- Server Module -->
+<div class="repo-module bg-purple-500" style="left: 70%; top: 20%;">
+<i class="fas fa-server text-2xl mb-1"></i>
+<span>Server</span>
+<span class="text-xs">API</span>
+</div>
+<!-- Collector Module -->
+<div class="repo-module bg-yellow-500" style="left: 45%; top: 70%;">
+<i class="fas fa-download text-2xl mb-1"></i>
+<span>Collector</span>
+<span class="text-xs">Dados</span>
+</div>
+<!-- Connection Lines -->
+<svg height="100%" style="position: absolute; top: 0; left: 0; z-index: -1;" width="100%">
+<!-- Lines to Frontend -->
+<line stroke="#19747E" stroke-width="2" x1="50%" x2="20%" y1="50%" y2="20%"></line>
+<!-- Lines to Server -->
+<line stroke="#19747E" stroke-width="2" x1="50%" x2="70%" y1="50%" y2="20%"></line>
+<!-- Lines to Collector -->
+<line stroke="#19747E" stroke-width="2" x1="50%" x2="45%" y1="50%" y2="70%"></line>
+</svg>
+</div>
+</div>
+<div class="mt-4 text-center">
+<p class="text-lg font-semibold">Entrega de binários e contêineres</p>
+<div class="flex justify-center mt-2 space-x-4">
+<div class="flex items-center">
+<i class="fas fa-box text-gray-600 mr-2"></i>
+<span>Binários</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-cube text-gray-600 mr-2"></i>
+<span>Contêineres</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-6 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">4/24</div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modelo 2 - Embeddings Técnicos</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .model-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-left: 4px solid #19747E;
+        }
+        .embedding-container {
+            position: relative;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            
+        }
+        .embedding-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #19747E;
+            opacity: 0.7;
+        }
+        .embedding-line {
+            position: absolute;
+            background-color: rgba(25, 116, 126, 0.3);
+            transform-origin: 0 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col">
+<!-- Header -->
+<div class="mb-6">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Modelo 2 - Embeddings Técnicos</h1>
+</div>
+<!-- Main Content -->
+<div class="flex flex-1">
+<!-- Left Column - Model Information -->
+<div class="w-1/2 pr-6">
+<div class="model-card p-5 mb-6 shadow-md">
+<div class="flex items-center mb-4">
+<i class="fas fa-brain text-3xl text-gray-600 mr-4"></i>
+<div>
+<h2 class="text-2xl font-semibold">Qwen/Qwen3-Embedding-0.6B</h2>
+<p class="text-gray-600">Modelo de Embedding Técnico</p>
+</div>
+</div>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+<span>Análise da descrição estatística e estrutural do repositório</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+<span>Processa entradas técnicas e estruturais</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
+<span>Retorna similaridade de cosseno (0 a 1)</span>
+</li>
+</ul>
+</div>
+<div class="model-card p-5 shadow-md">
+<h3 class="text-xl font-semibold mb-3">Características</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center">
+<i class="fas fa-bolt text-yellow-500 mr-2"></i>
+<span>Processamento eficiente</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-code text-blue-500 mr-2"></i>
+<span>Entendimento técnico</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-chart-line text-green-500 mr-2"></i>
+<span>Análise estatística</span>
+</div>
+<div class="flex items-center">
+<i class="fas fa-project-diagram text-purple-500 mr-2"></i>
+<span>Estrutura de diretórios</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column - Visual Representation -->
+<div class="w-1/2 pl-6">
+<div class="bg-white bg-opacity-80 p-5 rounded-lg shadow-md mb-6">
+<h3 class="text-xl font-semibold mb-3">Fluxo de Análise</h3>
+<div class="flex items-center mb-4">
+<div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+<i class="fas fa-folder-open text-gray-600"></i>
+</div>
+<div class="flex-1 mx-2 h-1 bg-gradient-to-r from-gray-200 to-gray-300"></div>
+<div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
+<i class="fas fa-cogs text-gray-600"></i>
+</div>
+<div class="flex-1 mx-2 h-1 bg-gradient-to-r from-gray-300 to-gray-400"></div>
+<div class="w-12 h-12 rounded-full bg-gray-400 flex items-center justify-center">
+<i class="fas fa-vector-square text-gray-600"></i>
+</div>
+</div>
+<p class="text-sm text-gray-600 text-center">Estrutura do Repositório → Processamento → Embeddings</p>
+</div>
+<!-- Embedding Visual Representation -->
+<div class="embedding-container p-4">
+<h3 class="text-xl font-semibold mb-2">Representação de Embeddings</h3>
+<div class="flex justify-between items-center mb-2">
+<div class="text-sm">Similaridade: 0.6881</div>
+<div class="text-sm">GitHub Flow</div>
+</div>
+<!-- Embedding visualization created with CSS -->
+<div class="relative h-32">
+<div class="absolute top-0 left-0 w-full h-full" id="embedding-viz"></div>
+</div>
+<p class="text-sm text-gray-600 mt-2">
+<i class="fas fa-info-circle mr-1"></i>
+                        O modelo identificou GitHub Flow como a estratégia de branching com maior similaridade (0.6881)
+                    </p>
+</div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-6 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">7/24</div>
+</div>
+</div>
+<script>
+        // Create a simple embedding visualization
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = d3.select("#embedding-viz");
+            const width = container.node().getBoundingClientRect().width;
+            const height = container.node().getBoundingClientRect().height;
+            
+            // Create some abstract embedding points
+            const embeddingData = [
+                {x: width * 0.2, y: height * 0.3, group: 1},
+                {x: width * 0.3, y: height * 0.7, group: 1},
+                {x: width * 0.5, y: height * 0.2, group: 1},
+                {x: width * 0.6, y: height * 0.6, group: 1},
+                {x: width * 0.8, y: height * 0.4, group: 1},
+                {x: width * 0.25, y: height * 0.5, group: 2},
+                {x: width * 0.45, y: height * 0.8, group: 2},
+                {x: width * 0.65, y: height * 0.3, group: 2},
+                {x: width * 0.75, y: height * 0.7, group: 2},
+            ];
+            
+            // Create document vector
+            const docVector = {x: width * 0.5, y: height * 0.5};
+            
+            // Draw lines from document vector to each point
+            embeddingData.forEach(point => {
+                container.append("div")
+                    .attr("class", "embedding-line")
+                    .style("left", docVector.x + "px")
+                    .style("top", docVector.y + "px")
+                    .style("width", Math.sqrt(Math.pow(point.x - docVector.x, 2) + Math.pow(point.y - docVector.y, 2)) + "px")
+                    .style("height", "1px")
+                    .style("transform", `rotate(${Math.atan2(point.y - docVector.y, point.x - docVector.x) * 180 / Math.PI}deg)`);
+            });
+            
+            // Draw points
+            embeddingData.forEach(point => {
+                container.append("div")
+                    .attr("class", "embedding-dot")
+                    .style("left", point.x - 6 + "px")
+                    .style("top", point.y - 6 + "px")
+                    .style("background-color", point.group === 1 ? "#19747E" : "#7A9E9F");
+            });
+            
+            // Draw document vector
+            container.append("div")
+                .attr("class", "embedding-dot")
+                .style("left", docVector.x - 8 + "px")
+                .style("top", docVector.y - 8 + "px")
+                .style("width", "16px")
+                .style("height", "16px")
+                .style("background-color", "#D62828");
+        });
+    </script>
+
+</body></html>

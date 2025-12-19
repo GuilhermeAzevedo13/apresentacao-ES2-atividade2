@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resultados Modelo 2 - Estratégias de Branching</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .bar-chart-container {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .bar-label {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+        }
+        .strategy-icon {
+            width: 30px;
+            text-align: center;
+            margin-right: 10px;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-4">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Resultados Modelo 2 - Estratégias de Branching</h1>
+<h2 class="text-2xl text-center text-gray-700 mb-3">Embeddings Técnicos (Qwen/Qwen3-Embedding-0.6B)</h2>
+</div>
+<!-- Explanation -->
+<div class="mb-4 bg-white bg-opacity-70 p-3 rounded-lg shadow-sm">
+<p class="text-lg"><i class="fas fa-info-circle text-blue-500 mr-2"></i> <strong>Nota:</strong> Similaridade de cosseno (0 a 1). Quanto mais próximo de 1, maior a similaridade.</p>
+</div>
+<!-- Chart Container -->
+<div class="flex-grow bar-chart-container p-5" id="chart-container">
+<div id="bar-chart"></div>
+</div>
+<!-- Key Findings -->
+<div class="mt-4 bg-white bg-opacity-70 p-3 rounded-lg shadow-sm">
+<p class="text-lg"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i> <strong>Encontrados:</strong> GitHub Flow (0.6881) e GitLab Flow (0.6808) como as estratégias mais semelhantes.</p>
+</div>
+<!-- Footer with page number -->
+<div class="mt-3 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">13/24</div>
+</div>
+</div>
+<script>
+        // Data for the chart
+        const data = [
+            { strategy: "GitHub Flow", score: 0.6881, icon: "code-branch" },
+            { strategy: "GitLab Flow", score: 0.6808, icon: "code-branch" },
+            { strategy: "Gitflow", score: 0.6574, icon: "code-branch" },
+            { strategy: "Trunk-Based", score: 0.6162, icon: "code" }
+        ];
+        
+        // Sort data by score in descending order
+        data.sort((a, b) => b.score - a.score);
+        
+        // Set up the chart dimensions - REDUCED HEIGHT
+        const margin = { top: 20, right: 30, bottom: 40, left: 200 };
+        const width = 800 - margin.left - margin.right;
+        const height = 260 - margin.top - margin.bottom;
+        
+        // Create the SVG container
+        const svg = d3.select("#bar-chart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+        
+        // Create the scales
+        const x = d3.scaleLinear()
+            .domain([0, 1])
+            .range([0, width]);
+        
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.strategy))
+            .range([0, height])
+            .padding(0.3);
+        
+        // Create the bars
+        svg.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("y", d => y(d.strategy))
+            .attr("height", y.bandwidth())
+            .attr("x", 0)
+            .attr("width", 0)
+            .attr("fill", (d, i) => {
+                const colors = ["#19747E", "#2E8B57", "#3CB371", "#66CDAA"];
+                return colors[i];
+            })
+            .attr("rx", 4)
+            .attr("ry", 4)
+            .transition()
+            .duration(1000)
+            .attr("width", d => x(d.score));
+        
+        // Add the x-axis
+        svg.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(5).tickFormat(d => d * 100 + "%"))
+            .selectAll("text")
+            .attr("font-size", "12px");
+        
+        // Add the y-axis
+        svg.append("g")
+            .call(d3.axisLeft(y))
+            .selectAll("text")
+            .attr("font-size", "14px")
+            .attr("font-weight", "bold");
+        
+        // Add labels to the bars
+        svg.selectAll(".label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "bar-label")
+            .attr("y", d => y(d.strategy) + y.bandwidth() / 2 + 5)
+            .attr("x", d => x(d.score) + 5)
+            .text(d => d.score.toFixed(4))
+            .attr("fill", "black")
+            .attr("opacity", 0)
+            .transition()
+            .duration(1000)
+            .attr("opacity", 1);
+        
+        // Add icons to the y-axis labels
+        svg.selectAll(".strategy-icon")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "strategy-icon")
+            .attr("y", d => y(d.strategy) + y.bandwidth() / 2 + 5)
+            .attr("x", -10)
+            .attr("text-anchor", "end")
+            .attr("font-family", "FontAwesome")
+            .attr("font-size", "16px")
+            .attr("fill", "#19747E")
+            .text(d => {
+                const iconMap = {
+                    "code-branch": "\uf126",
+                    "code": "\uf121"
+                };
+                return iconMap[d.icon];
+            });
+    </script>
+
+</body></html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Análise Crítica - Branching</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .content-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-left: 4px solid #19747E;
+        }
+        .highlight-text {
+            color: #19747E;
+            font-weight: bold;
+        }
+        .model-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .model-header {
+            background-color: #19747E;
+            color: white;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .bar-negative {
+            fill: #e74c3c;
+        }
+        .bar-positive {
+            fill: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col">
+<!-- Header -->
+<div class="mb-6">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Análise Crítica - Branching</h1>
+</div>
+<!-- Main Content -->
+<div class="flex-grow grid grid-cols-2 gap-6">
+<!-- Left Column - Analysis -->
+<div class="content-box p-5">
+<h2 class="text-2xl font-semibold mb-4 flex items-center">
+<i class="fas fa-search-plus text-gray-700 mr-3"></i>
+                    Análise dos Resultados
+                </h2>
+<div class="space-y-4">
+<div class="flex items-start">
+<i class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-3 text-xl"></i>
+<p><span class="highlight-text">Gitflow</span> considerado uma alucinação pelo modelo 1 (BAAI/bge-reranker) devido à leitura literal de arquivos, sem compreender a realidade do projeto.</p>
+</div>
+<div class="flex items-start">
+<i class="fas fa-check-circle text-green-600 mt-1 mr-3 text-xl"></i>
+<p><span class="highlight-text">GitHub Flow</span> venceu nos modelos semânticos (Qwen e mDeBERTa), alinhado à realidade do projeto.</p>
+</div>
+<div class="flex items-start">
+<i class="fas fa-info-circle text-blue-500 mt-1 mr-3 text-xl"></i>
+<p>Verificamos que o projeto <span class="highlight-text">não possui branch develop</span>, o que invalida a estratégia Gitflow como alucinação.</p>
+</div>
+</div>
+<div class="mt-6 p-4 bg-gray-100 rounded-lg">
+<h3 class="text-xl font-semibold mb-2 flex items-center">
+<i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                        Conclusão
+                    </h3>
+<p>Apesar de ter a melhor pontuação no modelo 1, Gitflow foi considerado uma alucinação porque não reflete a real estrutura do repositório. Já os modelos semânticos (2 e 3) compreenderam melhor a realidade do projeto e optaram por estratégias mais adequadas.</p>
+</div>
+</div>
+<!-- Right Column - Visualization -->
+<div class="space-y-4">
+<!-- Model 1 Results -->
+<div class="model-card">
+<div class="model-header p-3">
+<h3 class="text-lg font-semibold flex items-center">
+<i class="fas fa-robot mr-2"></i>
+                            Modelo 1 (BAAI/bge-reranker)
+                        </h3>
+</div>
+<div class="p-3">
+<div class="h-32" id="chart1"></div>
+<div class="text-center text-sm mt-2">
+<span class="text-red-500">Quanto mais próximo de 0, melhor</span>
+</div>
+</div>
+</div>
+<!-- Model 2 &amp; 3 Results -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Model 2 -->
+<div class="model-card">
+<div class="model-header p-3">
+<h3 class="text-base font-semibold flex items-center">
+<i class="fas fa-robot mr-2"></i>
+                                Modelo 2 (Qwen)
+                            </h3>
+</div>
+<div class="p-3">
+<div class="h-24" id="chart2"></div>
+<div class="text-center text-sm mt-2">
+<span class="text-green-500">Similaridade de cosseno</span>
+</div>
+</div>
+</div>
+<!-- Model 3 -->
+<div class="model-card">
+<div class="model-header p-3">
+<h3 class="text-base font-semibold flex items-center">
+<i class="fas fa-robot mr-2"></i>
+                                Modelo 3 (mDeBERTa)
+                            </h3>
+</div>
+<div class="p-3">
+<div class="h-24" id="chart3"></div>
+<div class="text-center text-sm mt-2">
+<span class="text-green-500">Probabilidade semântica</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-6 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">18/24</div>
+</div>
+</div>
+<script>
+        // Data from the document
+        const model1Data = [
+            {strategy: "Gitflow", score: -3.5156},
+            {strategy: "GitLab Flow", score: -4.4922},
+            {strategy: "GitHub Flow", score: -5.0820},
+            {strategy: "Trunk-Based", score: -7.0039}
+        ];
+        
+        const model2Data = [
+            {strategy: "GitHub Flow", score: 0.6881},
+            {strategy: "GitLab Flow", score: 0.6808},
+            {strategy: "Gitflow", score: 0.6574},
+            {strategy: "Trunk-Based", score: 0.6162}
+        ];
+        
+        const model3Data = [
+            {strategy: "GitHub Flow", score: 0.5341},
+            {strategy: "Trunk-Based", score: 0.2828},
+            {strategy: "Gitflow", score: 0.1507},
+            {strategy: "GitLab Flow", score: 0.0867}
+        ];
+        
+        // Chart 1 - Model 1 (Negative scores)
+        const chart1 = d3.select("#chart1")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .attr("viewBox", "0 0 400 130");
+            
+        const x1 = d3.scaleBand()
+            .domain(model1Data.map(d => d.strategy))
+            .range([40, 380])
+            .padding(0.3);
+            
+        const y1 = d3.scaleLinear()
+            .domain([-8, 0])
+            .range([100, 20]);
+            
+        // Y-axis
+        chart1.append("g")
+            .attr("transform", "translate(40, 0)")
+            .call(d3.axisLeft(y1).ticks(4));
+            
+        // X-axis
+        chart1.append("g")
+            .attr("transform", "translate(0, 100)")
+            .call(d3.axisBottom(x1))
+            .selectAll("text")
+            .style("font-size", "10px");
+            
+        // Bars
+        chart1.selectAll("rect")
+            .data(model1Data)
+            .enter()
+            .append("rect")
+            .attr("x", d => x1(d.strategy))
+            .attr("y", d => y1(d.score))
+            .attr("width", x1.bandwidth())
+            .attr("height", d => 100 - y1(d.score))
+            .attr("class", "bar-negative");
+            
+        // Chart 2 (Model 2 - Cosine similarity)
+        const chart2 = d3.select("#chart2")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .attr("viewBox", "0 0 180 100");
+            
+        const x2 = d3.scaleBand()
+            .domain(model2Data.map(d => d.strategy))
+            .range([10, 170])
+            .padding(0.3);
+            
+        const y2 = d3.scaleLinear()
+            .domain([0, 0.7])
+            .range([80, 10]);
+            
+        // Y-axis
+        chart2.append("g")
+            .attr("transform", "translate(10, 0)")
+            .call(d3.axisLeft(y2).ticks(3).tickFormat(d => d.toFixed(1)));
+            
+        // X-axis
+        chart2.append("g")
+            .attr("transform", "translate(0, 80)")
+            .call(d3.axisBottom(x2))
+            .selectAll("text")
+            .style("font-size", "8px");
+            
+        // Bars
+        chart2.selectAll("rect")
+            .data(model2Data)
+            .enter()
+            .append("rect")
+            .attr("x", d => x2(d.strategy))
+            .attr("y", d => y2(d.score))
+            .attr("width", x2.bandwidth())
+            .attr("height", d => 80 - y2(d.score))
+            .attr("class", "bar-positive");
+            
+        // Chart 3 (Model 3 - Semantic probability)
+        const chart3 = d3.select("#chart3")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .attr("viewBox", "0 0 180 100");
+            
+        const x3 = d3.scaleBand()
+            .domain(model3Data.map(d => d.strategy))
+            .range([10, 170])
+            .padding(0.3);
+            
+        const y3 = d3.scaleLinear()
+            .domain([0, 0.6])
+            .range([80, 10]);
+            
+        // Y-axis
+        chart3.append("g")
+            .attr("transform", "translate(10, 0)")
+            .call(d3.axisLeft(y3).ticks(3).tickFormat(d => d.toFixed(1)));
+            
+        // X-axis
+        chart3.append("g")
+            .attr("transform", "translate(0, 80)")
+            .call(d3.axisBottom(x3))
+            .selectAll("text")
+            .style("font-size", "8px");
+            
+        // Bars
+        chart3.selectAll("rect")
+            .data(model3Data)
+            .enter()
+            .append("rect")
+            .attr("x", d => x3(d.strategy))
+            .attr("y", d => y3(d.score))
+            .attr("width", x3.bandwidth())
+            .attr("height", d => 80 - y3(d.score))
+            .attr("class", "bar-positive");
+    </script>
+
+</body></html>

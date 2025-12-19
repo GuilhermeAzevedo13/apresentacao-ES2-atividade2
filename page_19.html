@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Comparativo Consolidado - Releases</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .table-header {
+            background-color: #19747E;
+            color: white;
+        }
+        .table-row:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        .table-row:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+        .table-row:hover {
+            background-color: rgba(25, 116, 126, 0.2);
+        }
+        .strategy-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .rank-1 {
+            background-color: #FFD700;
+            color: #333;
+        }
+        .rank-2 {
+            background-color: #C0C0C0;
+            color: #333;
+        }
+        .rank-3 {
+            background-color: #CD7F32;
+            color: #fff;
+        }
+        .rank-4 {
+            background-color: #696969;
+            color: #fff;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide p-8 flex flex-col" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-3">
+<div class="header-line mb-3"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-1">Comparativo Consolidado - Releases</h1>
+<p class="text-xl text-center text-gray-700 mb-2">Consolidação das abordagens para Releases</p>
+</div>
+<!-- Main Content -->
+<div class="flex flex-col items-center mb-2">
+<!-- Table -->
+<div class="w-full max-w-4xl mb-3">
+<table class="w-full border-collapse">
+<thead>
+<tr class="table-header">
+<th class="py-2 px-4 text-left">Classificação</th>
+<th class="py-2 px-4 text-center">
+<div class="flex items-center justify-center">
+<i class="fas fa-robot mr-2"></i>
+                                    Modelo 1 (BAAI)
+                                </div>
+</th>
+<th class="py-2 px-4 text-center">
+<div class="flex items-center justify-center">
+<i class="fas fa-robot mr-2"></i>
+                                    Modelo 2 (Qwen)
+                                </div>
+</th>
+<th class="py-2 px-4 text-center">
+<div class="flex items-center justify-center">
+<i class="fas fa-robot mr-2"></i>
+                                    Modelo 3 (mDeBERTa)
+                                </div>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="table-row">
+<td class="py-2 px-4 font-semibold">
+<div class="flex items-center">
+<i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                                    1º Lugar
+                                </div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-1">Rolling Release</span>
+<div class="text-sm text-gray-600">(-4.63)</div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-2">Semantic Versioning</span>
+<div class="text-sm text-gray-600">(0.52)</div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-1">Release Train</span>
+<div class="text-sm text-gray-600">(0.79)</div>
+</td>
+</tr>
+<tr class="table-row">
+<td class="py-2 px-4 font-semibold">
+<div class="flex items-center">
+<i class="fas fa-medal text-gray-300 mr-2"></i>
+                                    2º Lugar
+                                </div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-2">Semantic Versioning</span>
+<div class="text-sm text-gray-600">(-4.68)</div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-3">Ad-hoc Release</span>
+<div class="text-sm text-gray-600">(0.48)</div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-2">Semantic Versioning</span>
+<div class="text-sm text-gray-600">(0.58)</div>
+</td>
+</tr>
+<tr class="table-row">
+<td class="py-2 px-4 font-semibold">
+<div class="flex items-center">
+<i class="fas fa-medal text-amber-700 mr-2"></i>
+                                    3º Lugar
+                                </div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-3">Ad-hoc Release</span>
+<div class="text-sm text-gray-600">(-5.57)</div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-4">Rolling Release</span>
+<div class="text-sm text-gray-600">(0.48)</div>
+</td>
+<td class="py-2 px-4 text-center">
+<span class="strategy-badge rank-3">Rolling Release</span>
+<div class="text-sm text-gray-600">(0.19)</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Visualization -->
+<div class="w-full max-w-4xl h-32" id="chart"></div>
+</div>
+<!-- Analysis -->
+<div class="bg-white bg-opacity-70 p-3 rounded-lg shadow-sm mb-2">
+<p class="text-lg"><i class="fas fa-chart-line text-gray-700 mr-2"></i><strong>Análise:</strong> Release Train é a estratégia de gestão (previsibilidade). Semantic Versioning aparece forte em todos pois é a ferramenta de nomenclatura usada no projeto.</p>
+</div>
+<!-- Footer with page number -->
+<div class="mt-auto flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">19/24</div>
+</div>
+</div>
+<script>
+        // D3.js visualization
+        const data = [
+            {strategy: "Rolling Release", model1: -4.63, model2: 0.48, model3: 0.19, normalized: 4.63},
+            {strategy: "Semantic Versioning", model1: -4.68, model2: 0.52, model3: 0.58, normalized: 4.68},
+            {strategy: "Ad-hoc Release", model1: -5.57, model2: 0.48, model3: 0.0168, normalized: 5.57},
+            {strategy: "Release Train", model1: -6.91, model2: 0.45, model3: 0.79, normalized: 6.91}
+        ];
+
+        const margin = {top: 10, right: 30, bottom: 30, left: 150};
+        const width = 800 - margin.left - margin.right;
+        const height = 120 - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Add X axis
+        const x = d3.scaleLinear()
+            .domain([0, 7])
+            .range([0, width]);
+        
+        svg.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .style("text-anchor", "middle");
+
+        // Y axis
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.strategy))
+            .range([0, height])
+            .padding(0.2);
+        
+        svg.append("g")
+            .call(d3.axisLeft(y))
+            .selectAll("text")
+            .style("font-size", "12px");
+
+        // Add bars
+        svg.selectAll("bars")
+            .data(data)
+            .join("rect")
+            .attr("x", 0)
+            .attr("y", d => y(d.strategy))
+            .attr("width", d => x(d.normalized))
+            .attr("height", y.bandwidth())
+            .attr("fill", d => {
+                if (d.strategy === "Release Train") return "#19747E";
+                if (d.strategy === "Semantic Versioning") return "#4A90E2";
+                if (d.strategy === "Rolling Release") return "#50C878";
+                return "#888888";
+            })
+            .attr("opacity", 0.8);
+
+        // Add labels
+        svg.selectAll("labels")
+            .data(data)
+            .join("text")
+            .attr("x", d => x(d.normalized) + 5)
+            .attr("y", d => y(d.strategy) + y.bandwidth()/2)
+            .attr("dy", "0.35em")
+            .text(d => d.normalized.toFixed(2))
+            .style("font-size", "12px")
+            .style("fill", "#333");
+    </script>
+
+</body></html>

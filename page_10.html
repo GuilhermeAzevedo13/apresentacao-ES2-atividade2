@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dados de Integração e CI/CD</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .info-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-left: 4px solid #19747E;
+            transition: all 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        #pr-chart {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col">
+<!-- Header -->
+<div class="mb-6">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Dados de Integração e CI/CD</h1>
+</div>
+<!-- Main Content -->
+<div class="flex-grow grid grid-cols-2 gap-6">
+<!-- Left Column - Key Metrics -->
+<div class="flex flex-col space-y-6">
+<!-- PR Frequency Card -->
+<div class="info-card p-5 rounded-lg shadow-md">
+<div class="flex items-center mb-3">
+<i class="fas fa-code-branch text-3xl text-gray-700 mr-4"></i>
+<h3 class="text-2xl font-semibold">Frequência de Integração</h3>
+</div>
+<p class="text-xl mb-2">58 Pull Requests mesclados em 1 mês</p>
+<p class="text-lg text-gray-600">Alta frequência de integração contínua</p>
+</div>
+<!-- Testing Card -->
+<div class="info-card p-5 rounded-lg shadow-md">
+<div class="flex items-center mb-3">
+<i class="fas fa-vial text-3xl text-gray-700 mr-4"></i>
+<h3 class="text-2xl font-semibold">Testes Automáticos</h3>
+</div>
+<p class="text-xl mb-2">Testes automáticos presentes em todas as branches</p>
+<p class="text-lg text-gray-600">Garantia de qualidade e qualidade de código</p>
+</div>
+<!-- Versioning Card -->
+<div class="info-card p-5 rounded-lg shadow-md">
+<div class="flex items-center mb-3">
+<i class="fas fa-tag text-3xl text-gray-700 mr-4"></i>
+<h3 class="text-2xl font-semibold">Versionamento</h3>
+</div>
+<p class="text-xl mb-2">Uso de tags (ex: v1.9.0) e Milestones claros</p>
+<p class="text-lg text-gray-600">Padronização de versões e release</p>
+</div>
+</div>
+<!-- Right Column - Visualization -->
+<div class="flex flex-col space-y-6">
+<!-- PR Activity Visualization -->
+<div class="info-card p-5 rounded-lg shadow-md h-full flex flex-col">
+<div class="flex items-center mb-3">
+<i class="fas fa-chart-line text-3xl text-gray-700 mr-4"></i>
+<h3 class="text-2xl font-semibold">Atividade de Integração</h3>
+</div>
+<div class="flex-grow" id="pr-chart"></div>
+</div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-6 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">10/24</div>
+</div>
+</div>
+<script>
+        // D3.js visualization for PR activity
+        document.addEventListener('DOMContentLoaded', function() {
+            const chartContainer = d3.select("#pr-chart");
+            const containerWidth = document.getElementById('pr-chart').clientWidth;
+            const containerHeight = document.getElementById('pr-chart').clientHeight;
+            
+            // Create SVG
+            const svg = chartContainer.append("svg")
+                .attr("width", containerWidth)
+                .attr("height", containerHeight);
+                
+            // We only know there were 58 PRs merged in 1 month, so we'll create a simple visualization
+            // that represents this data without fabricating additional points
+            
+            // PR count
+            const prCount = 58;
+            
+            // Add text visualization
+            svg.append("text")
+                .attr("x", containerWidth / 2)
+                .attr("y", containerHeight / 2)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "48px")
+                .attr("font-weight", "bold")
+                .attr("fill", "#19747E")
+                .text(prCount);
+                
+            svg.append("text")
+                .attr("x", containerWidth / 2)
+                .attr("y", containerHeight / 2 + 40)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "18px")
+                .attr("fill", "#333333")
+                .text("Pull Requests mesclados");
+                
+            svg.append("text")
+                .attr("x", containerWidth / 2)
+                .attr("y", containerHeight / 2 + 65)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "16px")
+                .attr("fill", "#666666")
+                .text("em um mês (alta frequência)");
+                
+            // Add monthly indicator
+            const monthCircle = svg.append("circle")
+                .attr("cx", containerWidth / 2)
+                .attr("cy", containerHeight / 2 + 100)
+                .attr("r", 20)
+                .attr("fill", "rgba(25, 116, 126, 0.2)")
+                .attr("stroke", "#19747E")
+                .attr("stroke-width", 2);
+                
+            svg.append("text")
+                .attr("x", containerWidth / 2)
+                .attr("y", containerHeight / 2 + 105)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "14px")
+                .attr("fill", "#19747E")
+                .text("1 mês");
+        });
+    </script>
+
+</body></html>

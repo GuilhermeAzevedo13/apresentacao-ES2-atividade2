@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Auditoria Manual - Verdade Terrestre</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .finding-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-left: 4px solid #19747E;
+            transition: all 0.3s ease;
+        }
+        .finding-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .branch-visual {
+            position: relative;
+            height: 120px;
+            width: 100%;
+        }
+        .master-branch {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            height: 4px;
+            width: 300px;
+            background-color: #19747E;
+        }
+        .feature-branch {
+            position: absolute;
+            height: 4px;
+            background-color: #D1E8E2;
+            transform-origin: left;
+        }
+        .branch-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #19747E;
+        }
+    
+html {
+    overflow: hidden;
+}</style>
+</head>
+<body>
+<div class="slide p-8 flex flex-col" style=" overflow: hidden;">
+<!-- Header -->
+<div class="mb-4">
+<div class="header-line mb-3"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800">Auditoria Manual - Verdade Terrestre</h1>
+</div>
+<!-- Main Content -->
+<div class="grid grid-cols-2 gap-5 mb-4">
+<!-- Finding 1 -->
+<div class="finding-card p-3 rounded-lg shadow-sm flex items-start">
+<i class="fas fa-code-branch text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold mb-1">Quantidade de Branches</h3>
+<p class="text-lg">67 branches no repositório</p>
+</div>
+</div>
+<!-- Finding 2 -->
+<div class="finding-card p-3 rounded-lg shadow-sm flex items-start">
+<i class="fas fa-code-branch text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold mb-1">Branch Develop</h3>
+<p class="text-lg">Não existe branch develop</p>
+</div>
+</div>
+<!-- Finding 3 -->
+<div class="finding-card p-3 rounded-lg shadow-sm flex items-start">
+<i class="fas fa-code-merge text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold mb-1">Integração</h3>
+<p class="text-lg">Features integradas na master via PR</p>
+</div>
+</div>
+<!-- Finding 4 -->
+<div class="finding-card p-3 rounded-lg shadow-sm flex items-start">
+<i class="fas fa-code-pull-request text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold mb-1">Volume</h3>
+<p class="text-lg">58 Pull Requests em 1 mês</p>
+</div>
+</div>
+</div>
+<!-- Branch Visualization -->
+<div class="bg-white bg-opacity-80 rounded-lg shadow-sm p-3 mb-3">
+<h3 class="text-xl font-semibold mb-2">Estrutura de Branches Visual</h3>
+<div class="branch-visual" id="branch-visual">
+<!-- This will be populated by D3.js -->
+</div>
+</div>
+<!-- Additional Info -->
+<div class="grid grid-cols-2 gap-5">
+<!-- Finding 5 -->
+<div class="finding-card p-3 rounded-lg shadow-sm flex items-start">
+<i class="fas fa-check-circle text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold mb-1">CI/CD</h3>
+<p class="text-lg">Testes automáticos em todas as branches</p>
+</div>
+</div>
+<!-- Finding 6 -->
+<div class="finding-card p-3 rounded-lg shadow-sm flex items-start">
+<i class="fas fa-tag text-3xl text-gray-600 mr-4 mt-1"></i>
+<div>
+<h3 class="text-xl font-semibold mb-1">Releases</h3>
+<p class="text-lg">Uso de tags (ex: v1.9.0) e milestones</p>
+</div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-auto pt-3 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">9/24</div>
+</div>
+</div>
+<script>
+        // D3.js visualization for branch structure
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = d3.select("#branch-visual");
+            const width = container.node().getBoundingClientRect().width;
+            const height = 120;
+            
+            // Create SVG
+            const svg = container.append("svg")
+                .attr("width", width)
+                .attr("height", height);
+                
+            // Create master branch
+            svg.append("line")
+                .attr("x1", 50)
+                .attr("y1", 40)
+                .attr("x2", width - 50)
+                .attr("y2", 40)
+                .attr("stroke", "#19747E")
+                .attr("stroke-width", 4);
+                
+            // Add master text
+            svg.append("text")
+                .attr("x", 50)
+                .attr("y", 25)
+                .text("master")
+                .attr("fill", "#333")
+                .attr("font-weight", "bold");
+                
+            // Create mainline commits
+            const mainlinePoints = [50, width/5, 2*width/5, 3*width/5, 4*width/5, width-50];
+            
+            mainlinePoints.forEach((x, i) => {
+                svg.append("circle")
+                    .attr("cx", x)
+                    .attr("cy", 40)
+                    .attr("r", 6)
+                    .attr("fill", "#19747E");
+                    
+                // Add commit text
+                svg.append("text")
+                    .attr("x", x)
+                    .attr("y", 65)
+                    .text(`commit ${i+1}`)
+                    .attr("text-anchor", "middle")
+                    .attr("fill", "#555")
+                    .attr("font-size", "12px");
+            });
+            
+            // Create feature branches
+            const featureBranches = [
+                {name: "feature/1", start: 100, end: 180, height: 20},
+                {name: "feature/2", start: 200, end: 250, height: 25},
+                {name: "feature/3", start: 300, end: 350, height: 20},
+                {name: "feature/4", start: 400, end: 450, height: 25},
+            ];
+            
+            featureBranches.forEach(feature => {
+                // Draw branch line
+                svg.append("line")
+                    .attr("x1", feature.start)
+                    .attr("y1", 40)
+                    .attr("x2", feature.start)
+                    .attr("y2", 40 - feature.height)
+                    .attr("stroke", "#D1E8E2")
+                    .attr("stroke-width", 3);
+                    
+                // Draw branch end
+                svg.append("line")
+                    .attr("x1", feature.start)
+                    .attr("y1", 40 - feature.height)
+                    .attr("x2", feature.end)
+                    .attr("y2", 40 - feature.height)
+                    .attr("stroke", "#D1E8E2")
+                    .attr("stroke-width", 3);
+                    
+                // Add branch name
+                svg.append("text")
+                    .attr("x", feature.start)
+                    .attr("y", 40 - feature.height - 8)
+                    .text(feature.name)
+                    .attr("text-anchor", "start")
+                    .attr("fill", "#555")
+                    .attr("font-size", "12px")
+                    .attr("font-weight", "bold");
+                    
+                // Add branch circle
+                svg.append("circle")
+                    .attr("cx", feature.start)
+                    .attr("cy", 40)
+                    .attr("r", 4)
+                    .attr("fill", "#D1E8E2");
+            });
+            
+            // Add PR indicators
+            svg.append("text")
+                .attr("x", width/2)
+                .attr("y", 90)
+                .text("Pull Requests para master")
+                .attr("text-anchor", "middle")
+                .attr("fill", "#333")
+                .attr("font-size", "14px")
+                .attr("font-weight", "bold");
+                
+            // Add arrows for PR flow
+            svg.append("path")
+                .attr("d", `M${width/2},70 L${width/2},55`)
+                .attr("stroke", "#19747E")
+                .attr("stroke-width", 2)
+                .attr("marker-end", "url(#arrowhead)")
+                .attr("fill", "none");
+                
+            // Define arrowhead marker
+            svg.append("defs").append("marker")
+                .attr("id", "arrowhead")
+                .attr("markerWidth", 10)
+                .attr("markerHeight", 7)
+                .attr("refX", 0)
+                .attr("refY", 3.5)
+                .attr("orient", "auto")
+                .append("polygon")
+                .attr("points", "0 0, 10 3.5, 0 7")
+                .attr("fill", "#19747E");
+        });
+    </script>
+
+</body></html>

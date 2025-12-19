@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Conclusões Finais - Estratégias Adotadas</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .strategy-card {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .strategy-icon {
+            background-color: #19747E;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .point-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .point-icon {
+            color: #19747E;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col">
+<!-- Header -->
+<div class="mb-8">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800">Conclusões Finais - Estratégias Adotadas</h1>
+</div>
+<!-- Main Content - Two Strategies -->
+<div class="flex-grow flex justify-between gap-8">
+<!-- GitHub Flow Strategy -->
+<div class="strategy-card flex-1 p-6 flex flex-col">
+<div class="flex items-center mb-4">
+<div class="strategy-icon">
+<i class="fab fa-github text-2xl"></i>
+</div>
+<h2 class="text-2xl font-bold ml-4 text-gray-800">GitHub Flow</h2>
+</div>
+<div class="flex-grow">
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Branching baseado em features</p>
+</div>
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Integração contínua na master</p>
+</div>
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Pull requests rápidos</p>
+</div>
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Foco em agilidade</p>
+</div>
+</div>
+<!-- Visual representation of GitHub Flow -->
+<div class="h-24 mt-4" id="github-flow-visual"></div>
+</div>
+<!-- Release Train Strategy -->
+<div class="strategy-card flex-1 p-6 flex flex-col">
+<div class="flex items-center mb-4">
+<div class="strategy-icon">
+<i class="fas fa-train text-2xl"></i>
+</div>
+<h2 class="text-2xl font-bold ml-4 text-gray-800">Release Train</h2>
+</div>
+<div class="flex-grow">
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Entregas coordenadas</p>
+</div>
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Previsibilidade nas versões</p>
+</div>
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Rejeita modelos puramente contínuos</p>
+</div>
+<div class="point-item">
+<i class="fas fa-check-circle point-icon text-xl"></i>
+<p class="text-lg">Evita abordagem improvisada</p>
+</div>
+</div>
+<!-- Visual representation of Release Train -->
+<div class="h-24 mt-4" id="release-train-visual"></div>
+</div>
+</div>
+<!-- Bottom conclusion -->
+<div class="mt-6 bg-white bg-opacity-70 p-4 rounded-lg shadow-sm">
+<p class="text-center text-lg">
+<i class="fas fa-balance-scale text-gray-600 mr-2"></i>
+                Equilíbrio entre velocidade de desenvolvimento e controle de versão padronizado
+            </p>
+</div>
+<!-- Footer with page number -->
+<div class="mt-4 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">21/24</div>
+</div>
+</div>
+<script>
+        // D3.js visualization for GitHub Flow
+        const githubFlowSvg = d3.select("#github-flow-visual")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%");
+            
+        // Create the flow lines
+        githubFlowSvg.append("line")
+            .attr("x1", 50)
+            .attr("y1", 30)
+            .attr("x2", 450)
+            .attr("y2", 30)
+            .attr("stroke", "#19747E")
+            .attr("stroke-width", 3);
+            
+        // Create master branch circle
+        githubFlowSvg.append("circle")
+            .attr("cx", 50)
+            .attr("cy", 30)
+            .attr("r", 15)
+            .attr("fill", "#19747E");
+            
+        // Create feature branch circles
+        const featurePositions = [150, 250, 350, 450];
+        featurePositions.forEach(x => {
+            githubFlowSvg.append("circle")
+                .attr("cx", x)
+                .attr("cy", 30)
+                .attr("r", 10)
+                .attr("fill", "#D1E8E2")
+                .attr("stroke", "#19747E")
+                .attr("stroke-width", 2);
+        });
+        
+        // Add labels
+        githubFlowSvg.append("text")
+            .attr("x", 50)
+            .attr("y", 60)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#333333")
+            .text("master");
+            
+        featurePositions.forEach((x, i) => {
+            githubFlowSvg.append("text")
+                .attr("x", x)
+                .attr("y", 60)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#333333")
+                .text(`feature-${i+1}`);
+        });
+        
+        // D3.js visualization for Release Train
+        const releaseTrainSvg = d3.select("#release-train-visual")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%");
+            
+        // Create the train track
+        releaseTrainSvg.append("line")
+            .attr("x1", 50)
+            .attr("y1", 30)
+            .attr("x2", 450)
+            .attr("y2", 30)
+            .attr("stroke", "#19747E")
+            .attr("stroke-width", 5);
+            
+        // Create train cars
+        const trainPositions = [100, 200, 300, 400];
+        trainPositions.forEach(x => {
+            releaseTrainSvg.append("rect")
+                .attr("x", x)
+                .attr("y", 15)
+                .attr("width", 40)
+                .attr("height", 30)
+                .attr("fill", "#19747E")
+                .attr("rx", 5);
+        });
+        
+        // Add version labels
+        releaseTrainSvg.append("text")
+            .attr("x", 50)
+            .attr("y", 60)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#333333")
+            .text("v1.0");
+            
+        releaseTrainSvg.append("text")
+            .attr("x", 200)
+            .attr("y", 60)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#333333")
+            .text("v1.1");
+            
+        releaseTrainSvg.append("text")
+            .attr("x", 350)
+            .attr("y", 60)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#333333")
+            .text("v1.2");
+    </script>
+
+</body></html>

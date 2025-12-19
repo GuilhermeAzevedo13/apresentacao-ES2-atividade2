@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resultados Modelo 1 - Estratégias de Release</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .chart-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .bar {
+            fill: #19747E;
+            transition: all 0.3s ease;
+        }
+        .bar:hover {
+            fill: #0D4C56;
+        }
+        .axis text {
+            font-size: 12px;
+            fill: #333333;
+        }
+        .axis path, .axis line {
+            stroke: #666666;
+        }
+        .note-box {
+            background-color: rgba(25, 116, 126, 0.1);
+            border-left: 4px solid #19747E;
+        }
+    </style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col">
+<!-- Header -->
+<div class="mb-6">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Resultados Modelo 1 - Estratégias de Release</h1>
+<h2 class="text-2xl text-center text-gray-700 mb-4">Classificação por Texto (BAAI/bge-reranker-v2-m3)</h2>
+</div>
+<!-- Note about the model -->
+<div class="note-box p-3 mb-6 rounded-r-lg">
+<div class="flex items-center">
+<i class="fas fa-info-circle text-xl text-gray-600 mr-3"></i>
+<p class="text-lg"><span class="font-semibold">Nota:</span> Este modelo usa logits negativos (quanto mais próximo de 0, melhor).</p>
+</div>
+</div>
+<!-- Chart and explanation -->
+<div class="flex flex-grow">
+<!-- Chart -->
+<div class="chart-container p-4 flex-grow">
+<div id="chart"></div>
+</div>
+<!-- Explanation -->
+<div class="w-1/3 pl-6 flex flex-col justify-center">
+<div class="bg-white bg-opacity-80 p-4 rounded-lg shadow-sm">
+<h3 class="text-xl font-semibold mb-3">Análise dos Resultados</h3>
+<div class="mb-4 flex items-start">
+<i class="fas fa-trophy text-yellow-500 mr-2 mt-1"></i>
+<div>
+<p class="font-semibold">1º Lugar: Rolling Release</p>
+<p class="text-sm">-4.6328 (mais próximo de 0)</p>
+</div>
+</div>
+<div class="mb-4 flex items-start">
+<i class="fas fa-medal text-gray-400 mr-2 mt-1"></i>
+<div>
+<p class="font-semibold">2º Lugar: Semantic Versioning</p>
+<p class="text-sm">-4.6797</p>
+</div>
+</div>
+<div class="mb-4 flex items-start">
+<i class="fas fa-award text-amber-600 mr-2 mt-1"></i>
+<div>
+<p class="font-semibold">3º Lugar: Ad-hoc Release</p>
+<p class="text-sm">-5.5703</p>
+</div>
+</div>
+<div class="flex items-start">
+<i class="fas fa-last-place text-red-400 mr-2 mt-1"></i>
+<div>
+<p class="font-semibold">4º Lugar: Release Train</p>
+<p class="text-sm">-6.9180</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-6 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">12/24</div>
+</div>
+</div>
+<script>
+        // Data for the chart
+        const data = [
+            { strategy: "Rolling Release", score: -4.6328 },
+            { strategy: "Semantic Versioning", score: -4.6797 },
+            { strategy: "Ad-hoc Release", score: -5.5703 },
+            { strategy: "Release Train", score: -6.9180 }
+        ];
+
+        // Sort data by score (ascending, since lower negative values are better)
+        data.sort((a, b) => a.score - b.score);
+
+        // Set up the chart dimensions
+        const margin = { top: 30, right: 30, bottom: 70, left: 150 };
+        const width = 600 - margin.left - margin.right;
+        const height = 300 - margin.top - margin.bottom;
+
+        // Create the SVG container
+        const svg = d3.select("#chart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Create the X scale
+        const x = d3.scaleLinear()
+            .domain([0, -7])
+            .range([0, width]);
+
+        // Add X axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(7))
+            .append("text")
+            .attr("fill", "#000")
+            .attr("x", width / 2)
+            .attr("y", 40)
+            .attr("text-anchor", "middle")
+            .text("Score (Logits Negativos)");
+
+        // Create the Y scale
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.strategy))
+            .range([0, height])
+            .padding(0.3);
+
+        // Add Y axis
+        svg.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y))
+            .append("text")
+            .attr("fill", "#000")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -120)
+            .attr("x", -height / 2)
+            .attr("text-anchor", "middle")
+            .text("Estratégia de Release");
+
+        // Add the bars
+        svg.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("y", d => y(d.strategy))
+            .attr("height", y.bandwidth())
+            .attr("x", 0)
+            .attr("width", d => x(d.score))
+            .attr("rx", 4)
+            .attr("ry", 4);
+
+        // Add labels to the bars
+        svg.selectAll(".label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("x", d => x(d.score) + 5)
+            .attr("y", d => y(d.strategy) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .text(d => d.score)
+            .attr("font-size", "12px")
+            .attr("fill", "#333333");
+    </script>
+
+</body></html>

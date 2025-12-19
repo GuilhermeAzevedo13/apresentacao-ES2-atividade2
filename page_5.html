@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Metodologia - Três Abordagens com IA</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
+        body {width: 1280px; min-height: 720px; margin: 0;
+            padding: 0;}
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
+            color: #333333;
+        }
+        .header-line {
+            height: 4px;
+            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
+        }
+        .methodology-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .methodology-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .model-icon {
+            background-color: #19747E;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide p-10 flex flex-col">
+<!-- Header -->
+<div class="mb-8">
+<div class="header-line mb-4"></div>
+<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Metodologia - Três Abordagens com IA</h1>
+<p class="text-xl text-center text-gray-700">Utilização de três modelos LLM do Hugging Face para auditoria de código e análise estrutural</p>
+</div>
+<!-- Methodology Cards -->
+<div class="flex-grow flex justify-between items-stretch gap-6">
+<!-- Model 1 -->
+<div class="methodology-card flex-1 p-6 flex flex-col">
+<div class="flex items-center justify-center">
+<div class="model-icon">
+<i class="fas fa-sort-amount-down text-2xl"></i>
+</div>
+</div>
+<h3 class="text-xl font-bold text-center mb-2 text-gray-800">Classificação por Texto</h3>
+<p class="text-md font-semibold mb-3 text-center text-gray-700">BAAI/bge-reranker-v2-m3</p>
+<div class="flex-grow">
+<p class="text-base mb-4">Analisou arquivos brutos (branches_overview.txt, logs)</p>
+<ul class="list-disc pl-5">
+<li class="mb-1">Leitura literal de conteúdo</li>
+<li class="mb-1">Ordenação por relevância</li>
+<li>Detecção de padrões de branch</li>
+</ul>
+</div>
+<div class="mt-4 text-sm text-gray-600 italic">
+                    Nota: Modelo 1 - Usou logits negativos para classificação
+                </div>
+</div>
+<!-- Model 2 -->
+<div class="methodology-card flex-1 p-6 flex flex-col">
+<div class="flex items-center justify-center">
+<div class="model-icon">
+<i class="fas fa-project-diagram text-2xl"></i>
+</div>
+</div>
+<h3 class="text-xl font-bold text-center mb-2 text-gray-800">Embeddings Técnicos</h3>
+<p class="text-md font-semibold mb-3 text-center text-gray-700">Qwen/Qwen3-Embedding-0.6B</p>
+<div class="flex-grow">
+<p class="text-base mb-4">Analisou a descrição estatística e estrutural do repositório</p>
+<ul class="list-disc pl-5">
+<li class="mb-1">Vetorização de documentos</li>
+<li class="mb-1">Similaridade de cosseno</li>
+<li>Comparação de estruturas</li>
+</ul>
+</div>
+<div class="mt-4 text-sm text-gray-600 italic">
+                    Nota: Modelo 2 - Usou similaridade de cosseno (0 a 1)
+                </div>
+</div>
+<!-- Model 3 -->
+<div class="methodology-card flex-1 p-6 flex flex-col">
+<div class="flex items-center justify-center">
+<div class="model-icon">
+<i class="fas fa-brain text-2xl"></i>
+</div>
+</div>
+<h3 class="text-xl font-bold text-center mb-2 text-gray-800">Zero-Shot Classification</h3>
+<p class="text-md font-semibold mb-3 text-center text-gray-700">mDeBERTa-v3-base-xnli</p>
+<div class="flex-grow">
+<p class="text-base mb-4">Analisou resumos de hipóteses e definições teóricas</p>
+<ul class="list-disc pl-5">
+<li class="mb-1">Classificação sem treinamento</li>
+<li class="mb-1">Análise semântica</li>
+<li>Probabilidade de pertencimento</li>
+</ul>
+</div>
+<div class="mt-4 text-sm text-gray-600 italic">
+                    Nota: Modelo 3 - Usou probabilidade semântica
+                </div>
+</div>
+</div>
+<!-- Footer with page number -->
+<div class="mt-8 flex justify-between items-center">
+<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
+<div class="text-sm text-gray-600" style="visibility: hidden;">5/24</div>
+</div>
+</div>
+
+</body></html>
