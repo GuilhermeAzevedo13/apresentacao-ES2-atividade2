@@ -1,156 +1,268 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Dados de Integração e CI/CD</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; min-height: 720px; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
-            color: #333333;
-        }
-        .header-line {
-            height: 4px;
-            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
-        }
-        .info-card {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-left: 4px solid #19747E;
-            transition: all 0.3s ease;
-        }
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        #pr-chart {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
-<div class="slide p-10 flex flex-col">
-<!-- Header -->
-<div class="mb-6">
-<div class="header-line mb-4"></div>
-<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Dados de Integração e CI/CD</h1>
-</div>
-<!-- Main Content -->
-<div class="flex-grow grid grid-cols-2 gap-6">
-<!-- Left Column - Key Metrics -->
-<div class="flex flex-col space-y-6">
-<!-- PR Frequency Card -->
-<div class="info-card p-5 rounded-lg shadow-md">
-<div class="flex items-center mb-3">
-<i class="fas fa-code-branch text-3xl text-gray-700 mr-4"></i>
-<h3 class="text-2xl font-semibold">Frequência de Integração</h3>
-</div>
-<p class="text-xl mb-2">58 Pull Requests mesclados em 1 mês</p>
-<p class="text-lg text-gray-600">Alta frequência de integração contínua</p>
-</div>
-<!-- Testing Card -->
-<div class="info-card p-5 rounded-lg shadow-md">
-<div class="flex items-center mb-3">
-<i class="fas fa-vial text-3xl text-gray-700 mr-4"></i>
-<h3 class="text-2xl font-semibold">Testes Automáticos</h3>
-</div>
-<p class="text-xl mb-2">Testes automáticos presentes em todas as branches</p>
-<p class="text-lg text-gray-600">Garantia de qualidade e qualidade de código</p>
-</div>
-<!-- Versioning Card -->
-<div class="info-card p-5 rounded-lg shadow-md">
-<div class="flex items-center mb-3">
-<i class="fas fa-tag text-3xl text-gray-700 mr-4"></i>
-<h3 class="text-2xl font-semibold">Versionamento</h3>
-</div>
-<p class="text-xl mb-2">Uso de tags (ex: v1.9.0) e Milestones claros</p>
-<p class="text-lg text-gray-600">Padronização de versões e release</p>
-</div>
-</div>
-<!-- Right Column - Visualization -->
-<div class="flex flex-col space-y-6">
-<!-- PR Activity Visualization -->
-<div class="info-card p-5 rounded-lg shadow-md h-full flex flex-col">
-<div class="flex items-center mb-3">
-<i class="fas fa-chart-line text-3xl text-gray-700 mr-4"></i>
-<h3 class="text-2xl font-semibold">Atividade de Integração</h3>
-</div>
-<div class="flex-grow" id="pr-chart"></div>
-</div>
-</div>
-</div>
-<!-- Footer with page number -->
-<div class="mt-6 flex justify-between items-center">
-<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
-<div class="text-sm text-gray-600" style="visibility: hidden;">10/24</div>
-</div>
-</div>
-<script>
-        // D3.js visualization for PR activity
-        document.addEventListener('DOMContentLoaded', function() {
-            const chartContainer = d3.select("#pr-chart");
-            const containerWidth = document.getElementById('pr-chart').clientWidth;
-            const containerHeight = document.getElementById('pr-chart').clientHeight;
-            
-            // Create SVG
-            const svg = chartContainer.append("svg")
-                .attr("width", containerWidth)
-                .attr("height", containerHeight);
-                
-            // We only know there were 58 PRs merged in 1 month, so we'll create a simple visualization
-            // that represents this data without fabricating additional points
-            
-            // PR count
-            const prCount = 58;
-            
-            // Add text visualization
-            svg.append("text")
-                .attr("x", containerWidth / 2)
-                .attr("y", containerHeight / 2)
-                .attr("text-anchor", "middle")
-                .attr("font-size", "48px")
-                .attr("font-weight", "bold")
-                .attr("fill", "#19747E")
-                .text(prCount);
-                
-            svg.append("text")
-                .attr("x", containerWidth / 2)
-                .attr("y", containerHeight / 2 + 40)
-                .attr("text-anchor", "middle")
-                .attr("font-size", "18px")
-                .attr("fill", "#333333")
-                .text("Pull Requests mesclados");
-                
-            svg.append("text")
-                .attr("x", containerWidth / 2)
-                .attr("y", containerHeight / 2 + 65)
-                .attr("text-anchor", "middle")
-                .attr("font-size", "16px")
-                .attr("fill", "#666666")
-                .text("em um mês (alta frequência)");
-                
-            // Add monthly indicator
-            const monthCircle = svg.append("circle")
-                .attr("cx", containerWidth / 2)
-                .attr("cy", containerHeight / 2 + 100)
-                .attr("r", 20)
-                .attr("fill", "rgba(25, 116, 126, 0.2)")
-                .attr("stroke", "#19747E")
-                .attr("stroke-width", 2);
-                
-            svg.append("text")
-                .attr("x", containerWidth / 2)
-                .attr("y", containerHeight / 2 + 105)
-                .attr("text-anchor", "middle")
-                .attr("font-size", "14px")
-                .attr("fill", "#19747E")
-                .text("1 mês");
-        });
-    </script>
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Integração Contínua e Métricas</title>
 
-</body></html>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        height: 100%;
+      }
+
+      .title-gradient {
+        background: linear-gradient(90deg, #19747e, #26a69a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Estilos dos Cards de Métricas */
+      .metric-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+        border-left: 5px solid #19747e;
+      }
+      .metric-card:hover {
+        transform: translateX(5px);
+      }
+
+      /* Estilos do Pipeline Animado */
+      .pipeline-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        position: relative;
+      }
+
+      .pipeline-step {
+        width: 280px;
+        padding: 15px;
+        background: white;
+        border-radius: 10px;
+        margin: 10px 0;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+      }
+
+      .step-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      /* Linha conectora animada */
+      .connector-line {
+        position: absolute;
+        left: 50%;
+        top: 20px;
+        bottom: 20px;
+        width: 4px;
+        background: #cbd5e1;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+
+      .connector-active {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 4px;
+        background: #19747e;
+        transform: translateX(-50%);
+        z-index: 1;
+        height: 0%;
+        animation: flowLine 3s infinite ease-in-out;
+      }
+
+      @keyframes flowLine {
+        0% {
+          top: 40px;
+          height: 0%;
+          opacity: 1;
+        }
+        50% {
+          height: 80%;
+          opacity: 1;
+        }
+        100% {
+          top: 100%;
+          height: 0%;
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="p-10 flex flex-col relative">
+    <div class="mb-8">
+      <h1
+        class="text-4xl font-extrabold font-montserrat title-gradient mb-2 py-2 leading-tight"
+      >
+        Integração & Qualidade (CI/CD)
+      </h1>
+      <div class="w-24 h-2 bg-teal-600 rounded-full"></div>
+      <p class="text-gray-500 mt-2 text-lg">
+        Métricas coletadas no período de 15/Nov a 15/Dez
+      </p>
+    </div>
+
+    <div class="flex gap-8 h-full pb-8">
+      <div class="w-1/2 flex flex-col gap-6">
+        <div
+          class="glass-panel p-8 flex flex-col justify-center items-center text-center border-t-4 border-teal-500"
+        >
+          <i
+            class="fas fa-code-branch text-5xl text-teal-600 mb-4 opacity-20 absolute top-4 right-6"
+          ></i>
+          <div class="text-7xl font-extrabold text-gray-800 mb-2">58</div>
+          <div class="text-xl font-bold text-teal-700 uppercase tracking-wide">
+            Pull Requests
+          </div>
+          <p class="text-gray-500 mt-2">Mesclados na master em 30 dias</p>
+          <div
+            class="mt-4 bg-teal-50 text-teal-800 px-4 py-1 rounded-full text-sm font-semibold"
+          >
+            ~2 PRs por dia
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="metric-card border-l-blue-500">
+            <div
+              class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4"
+            >
+              <i class="fas fa-check-double text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-800">
+                Testes Automáticos
+              </h3>
+              <p class="text-sm text-gray-600">CI Ativo em todas as branches</p>
+            </div>
+          </div>
+
+          <div class="metric-card border-l-purple-500">
+            <div
+              class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-4"
+            >
+              <i class="fas fa-code-merge text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-800">Branch Develop</h3>
+              <p class="text-sm text-gray-600">
+                Inexistente (Merge direto na Master)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 glass-panel p-6 bg-gray-50/50">
+        <h3
+          class="text-center text-gray-400 font-bold uppercase text-xs tracking-widest mb-4"
+        >
+          Fluxo de Integração Identificado
+        </h3>
+
+        <div class="pipeline-container">
+          <div class="connector-line"></div>
+          <div class="connector-active"></div>
+
+          <div class="pipeline-step">
+            <div class="step-icon bg-gray-700">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <div>
+              <div class="font-bold text-gray-800">Feature Branch</div>
+              <div class="text-xs text-gray-500">Commit & Push</div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-icon bg-orange-500">
+              <i class="fas fa-vial"></i>
+            </div>
+            <div>
+              <div class="font-bold text-gray-800">CI Checks</div>
+              <div class="text-xs text-gray-500">Lint, Unit Tests</div>
+            </div>
+            <div class="absolute right-4 text-green-500">
+              <i class="fas fa-check-circle"></i>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-icon bg-purple-600">
+              <i class="fas fa-code-branch"></i>
+            </div>
+            <div>
+              <div class="font-bold text-gray-800">Pull Request</div>
+              <div class="text-xs text-gray-500">
+                Code Review & Merge to Master
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-step">
+            <div class="step-icon bg-teal-600">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div>
+              <div class="font-bold text-gray-800">Build & Release</div>
+              <div class="text-xs text-gray-500">Docker Image / Binaries</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-6 right-10 text-gray-400 font-bold text-xl opacity-60"
+    >
+      10
+    </div>
+  </body>
+</html>

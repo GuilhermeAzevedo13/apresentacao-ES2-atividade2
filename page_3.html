@@ -1,134 +1,173 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Objeto de Estudo - AnythingLLM</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; min-height: 720px; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
-            color: #333333;
-        }
-        .header-line {
-            height: 4px;
-            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
-        }
-        .info-card {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-left: 4px solid #19747E;
-            transition: all 0.3s ease;
-        }
-        .info-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-        .feature-item {
-            background-color: rgba(255, 255, 255, 0.6);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        .feature-item:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-        .icon-circle {
-            background-color: #19747E;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-<div class="slide p-10 flex flex-col">
-<!-- Header -->
-<div class="mb-8">
-<div class="header-line mb-4"></div>
-<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Objeto de Estudo - AnythingLLM</h1>
-</div>
-<!-- Main Content -->
-<div class="flex-grow flex flex-col md:flex-row gap-6">
-<!-- Left Column - Repository Info -->
-<div class="w-full md:w-1/2">
-<div class="info-card p-6 mb-6 rounded-lg shadow-md">
-<div class="flex items-center mb-4">
-<div class="icon-circle mr-4">
-<i class="fas fa-repository text-xl"></i>
-</div>
-<h2 class="text-2xl font-semibold">Repositório</h2>
-</div>
-<p class="text-xl mb-2">Mintplex-Labs/anything-llm</p>
-<p class="text-gray-600">Repositório GitHub do projeto</p>
-</div>
-<div class="info-card p-6 rounded-lg shadow-md">
-<div class="flex items-center mb-4">
-<div class="icon-circle mr-4">
-<i class="fas fa-robot text-xl"></i>
-</div>
-<h2 class="text-2xl font-semibold">Descrição</h2>
-</div>
-<p class="text-lg mb-3">Aplicação &#34;all-in-one&#34; de Inteligência Artificial (RAG) para Desktop e Docker.</p>
-<p class="text-lg">Permite conversar com documentos através de interface gráfica e API.</p>
-</div>
-</div>
-<!-- Right Column - Features and Relevance -->
-<div class="w-full md:w-1/2">
-<div class="mb-6">
-<div class="flex items-center mb-4">
-<div class="icon-circle mr-4">
-<i class="fas fa-chart-line text-xl"></i>
-</div>
-<h2 class="text-2xl font-semibold">Relevância</h2>
-</div>
-<div class="bg-white bg-opacity-70 p-4 rounded-lg shadow-sm">
-<p class="text-lg mb-2">Alta demanda de mercado por:</p>
-<ul class="list-disc pl-6 space-y-2">
-<li>Agentes de IA sem código</li>
-<li>Integração de LLMs (Large Language Models)</li>
-<li>Soluções de RAG (Retrieval-Augmented Generation)</li>
-</ul>
-</div>
-</div>
-<div>
-<div class="flex items-center mb-4">
-<div class="icon-circle mr-4">
-<i class="fas fa-cogs text-xl"></i>
-</div>
-<h2 class="text-2xl font-semibold">Recursos Principais</h2>
-</div>
-<div class="grid grid-cols-2 gap-3">
-<div class="feature-item p-3 flex items-center">
-<i class="fas fa-desktop text-gray-600 mr-3"></i>
-<span>Interface Desktop</span>
-</div>
-<div class="feature-item p-3 flex items-center">
-<i class="fas fa-docker text-gray-600 mr-3"></i>
-<span>Conteinerização</span>
-</div>
-<div class="feature-item p-3 flex items-center">
-<i class="fas fa-file-alt text-gray-600 mr-3"></i>
-<span>Processamento de Documentos</span>
-</div>
-<div class="feature-item p-3 flex items-center">
-<i class="fas fa-comments text-gray-600 mr-3"></i>
-<span>Interface Conversacional</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer with page number -->
-<div class="mt-6 flex justify-between items-center">
-<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
-<div class="text-sm text-gray-600" style="visibility: hidden;">3/24</div>
-</div>
-</div>
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objeto de Estudo: AnythingLLM</title>
 
-</body></html>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Painel de Vidro (Glassmorphism) */
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .border-teal-left {
+        border-left: 6px solid #19747e;
+      }
+
+      .title-gradient {
+        background: linear-gradient(90deg, #19747e, #26a69a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .icon-box {
+        width: 60px;
+        height: 60px;
+        background: rgba(25, 116, 126, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #19747e;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+    </style>
+  </head>
+  <body class="p-12 flex flex-col relative">
+    <div class="mb-8">
+      <h1
+        class="text-5xl font-extrabold font-montserrat title-gradient mb-2 py-2 leading-tight"
+      >
+        Objeto de Estudo
+      </h1>
+      <div class="w-24 h-2 bg-teal-600 rounded-full"></div>
+    </div>
+
+    <div class="flex gap-8 h-full pb-8">
+      <div class="w-1/2 flex flex-col gap-6">
+        <div class="glass-panel border-teal-left">
+          <div class="flex items-center mb-4">
+            <i class="fas fa-project-diagram text-3xl text-teal-700 mr-3"></i>
+            <h2 class="text-2xl font-bold text-gray-800 font-montserrat">
+              AnythingLLM
+            </h2>
+          </div>
+          <p class="text-xl text-gray-700 leading-relaxed">
+            Uma aplicação <strong>"all-in-one"</strong> de inteligência
+            artificial open-source (Desktop e Docker) desenvolvida pela
+            <em>Mintplex-Labs</em>.
+          </p>
+          <div class="mt-6 p-4 bg-teal-50 rounded-lg border border-teal-100">
+            <p class="text-teal-800 font-semibold">
+              <i class="fas fa-quote-left mr-2"></i>
+              Permite transformar documentos em contexto para qualquer LLM
+              usando RAG.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-panel border-teal-left">
+          <h3 class="text-xl font-bold text-gray-800 mb-2 font-montserrat">
+            <i class="fas fa-server mr-2 text-teal-600"></i>
+            Distribuição
+          </h3>
+          <p class="text-lg text-gray-600">
+            Disponível como binários instaláveis (Windows, Mac, Linux) e imagens
+            de contêiner para deploy em nuvem.
+          </p>
+        </div>
+      </div>
+
+      <div class="w-1/2 glass-panel bg-white/60 border-none">
+        <div class="text-center mb-8">
+          <i class="fas fa-robot text-8xl text-teal-200 mb-4"></i>
+          <h3 class="text-2xl font-bold text-teal-800 font-montserrat">
+            Por que escolhemos?
+          </h3>
+        </div>
+
+        <ul class="space-y-6 px-4">
+          <li class="flex items-start">
+            <div class="icon-box flex-shrink-0">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-800">Alta Demanda</h4>
+              <p class="text-gray-600">
+                Mercado aquecido para criação de agentes de IA privados sem
+                código (No-Code).
+              </p>
+            </div>
+          </li>
+
+          <li class="flex items-start">
+            <div class="icon-box flex-shrink-0">
+              <i class="fas fa-database"></i>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-800">Tecnologia RAG</h4>
+              <p class="text-gray-600">
+                Retrieval-Augmented Generation está no centro das soluções
+                corporativas atuais.
+              </p>
+            </div>
+          </li>
+
+          <li class="flex items-start">
+            <div class="icon-box flex-shrink-0">
+              <i class="fas fa-layer-group"></i>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold text-gray-800">
+                Gestão de Contexto
+              </h4>
+              <p class="text-gray-600">
+                Integração nativa de Vector Databases e múltiplos modelos de
+                LLM.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-6 right-10 text-gray-400 font-bold text-xl opacity-60"
+    >
+      03
+    </div>
+  </body>
+</html>

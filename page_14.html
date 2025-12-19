@@ -1,207 +1,220 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Resultados Modelo 2 - Estratégias de Release</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></script>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; min-height: 720px; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
-            color: #333333;
-        }
-        .header-line {
-            height: 4px;
-            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
-        }
-        .chart-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .bar {
-            fill: #19747E;
-            transition: fill 0.3s ease;
-        }
-        .bar:hover {
-            fill: #0D4C54;
-        }
-        .axis text {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 12px;
-        }
-        .axis path, .axis line {
-            stroke: #666;
-        }
-        .score-card {
-            background-color: white;
-            border-left: 4px solid #19747E;
-            transition: transform 0.3s ease;
-        }
-        .score-card:hover {
-            transform: translateX(5px);
-        }
-    </style>
-</head>
-<body>
-<div class="slide p-10 flex flex-col">
-<!-- Header -->
-<div class="mb-6">
-<div class="header-line mb-4"></div>
-<h1 class="text-4xl font-bold text-gray-800 mb-2">Resultados Modelo 2 - Estratégias de Release</h1>
-<h2 class="text-xl text-gray-700">Embeddings Técnicos (Qwen/Qwen3-Embedding-0.6B)</h2>
-</div>
-<!-- Model Description -->
-<div class="mb-4 bg-white bg-opacity-70 p-3 rounded-lg">
-<p class="text-lg"><i class="fas fa-info-circle text-blue-600 mr-2"></i> Similaridade de cosseno (0 a 1): Quanto mais próximo de 1, melhor a correspondência.</p>
-</div>
-<!-- Chart and Data Table Section -->
-<div class="flex flex-grow">
-<!-- Chart -->
-<div class="chart-container flex-grow p-4 mr-4">
-<div class="w-full h-64" id="chart"></div>
-</div>
-<!-- Data Table -->
-<div class="w-1/3">
-<div class="bg-white rounded-lg shadow-sm p-4">
-<h3 class="text-xl font-semibold mb-3 text-gray-700">Estratégias de Release</h3>
-<div class="space-y-3">
-<div class="score-card p-2">
-<div class="flex justify-between items-center">
-<span class="font-semibold">Semantic Versioning</span>
-<span class="text-lg font-bold text-green-700">0.5204</span>
-</div>
-<div class="w-full bg-gray-200 rounded-full h-2 mt-1">
-<div class="bg-green-600 h-2 rounded-full" style="width: 52.04%"></div>
-</div>
-</div>
-<div class="score-card p-2">
-<div class="flex justify-between items-center">
-<span class="font-semibold">Ad-hoc Release</span>
-<span class="text-lg font-bold text-green-700">0.4814</span>
-</div>
-<div class="w-full bg-gray-200 rounded-full h-2 mt-1">
-<div class="bg-green-600 h-2 rounded-full" style="width: 48.14%"></div>
-</div>
-</div>
-<div class="score-card p-2">
-<div class="flex justify-between items-center">
-<span class="font-semibold">Rolling Release</span>
-<span class="text-lg font-bold text-green-700">0.4755</span>
-</div>
-<div class="w-full bg-gray-200 rounded-full h-2 mt-1">
-<div class="bg-green-600 h-2 rounded-full" style="width: 47.55%"></div>
-</div>
-</div>
-<div class="score-card p-2">
-<div class="flex justify-between items-center">
-<span class="font-semibold">Release Train</span>
-<span class="text-lg font-bold text-green-700">0.4498</span>
-</div>
-<div class="w-full bg-gray-200 rounded-full h-2 mt-1">
-<div class="bg-green-600 h-2 rounded-full" style="width: 44.98%"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Conclusion -->
-<div class="mt-6 bg-white bg-opacity-70 p-4 rounded-lg">
-<p class="text-lg"><i class="fas fa-lightbulb text-yellow-500 mr-2"></i> <span class="font-semibold">Conclusão:</span> Semantic Versioning lidera as estratégias de release, seguido por Ad-hoc Release. Isso indica que a descrição estatística e estrutural do repositório mais se assemelha à Semantic Versioning.</p>
-</div>
-<!-- Footer with page number -->
-<div class="mt-4 flex justify-between items-center">
-<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
-<div class="text-sm text-gray-600" style="visibility: hidden;">14/24</div>
-</div>
-</div>
-<script>
-        // Data for the chart
-        const data = [
-            { strategy: "Semantic Versioning", score: 0.5204 },
-            { strategy: "Ad-hoc Release", score: 0.4814 },
-            { strategy: "Rolling Release", score: 0.4755 },
-            { strategy: "Release Train", score: 0.4498 }
-        ];
-        
-        // Set up the chart dimensions
-        const margin = { top: 20, right: 30, bottom: 60, left: 60 };
-        const width = document.getElementById('chart').clientWidth - margin.left - margin.right;
-        const height = document.getElementById('chart').clientHeight - margin.top - margin.bottom;
-        
-        // Create the SVG container
-        const svg = d3.select("#chart")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
-        
-        // Set up scales
-        const x = d3.scaleBand()
-            .domain(data.map(d => d.strategy))
-            .range([0, width])
-            .padding(0.3);
-        
-        const y = d3.scaleLinear()
-            .domain([0, 0.6])
-            .range([height, 0]);
-        
-        // Add X axis
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x))
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-25)");
-        
-        // Add Y axis
-        svg.append("g")
-            .attr("class", "axis")
-            .call(d3.axisLeft(y).ticks(6));
-        
-        // Add Y axis label
-        svg.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin.left)
-            .attr("x", 0 - (height / 2))
-            .attr("dy", "1em")
-            .style("text-anchor", "middle")
-            .style("font-size", "14px")
-            .text("Similaridade de Cosseno");
-        
-        // Add bars
-        svg.selectAll(".bar")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr("class", "bar")
-            .attr("x", d => x(d.strategy))
-            .attr("width", x.bandwidth())
-            .attr("y", d => y(d.score))
-            .attr("height", d => height - y(d.score));
-        
-        // Add score labels on top of bars
-        svg.selectAll(".score-label")
-            .data(data)
-            .enter()
-            .append("text")
-            .attr("class", "score-label")
-            .attr("x", d => x(d.strategy) + x.bandwidth() / 2)
-            .attr("y", d => y(d.score) - 5)
-            .attr("text-anchor", "middle")
-            .style("font-size", "12px")
-            .style("font-weight", "bold")
-            .text(d => d.score);
-    </script>
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultados Detalhados - Modelo 2 Releases</title>
 
-</body></html>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title-gradient {
+        background: linear-gradient(90deg, #19747e, #26a69a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .chart-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      .axis text {
+        font-size: 14px;
+        fill: #555;
+        font-family: "Open Sans", sans-serif;
+      }
+      .axis path,
+      .axis line {
+        stroke: #cbd5e1;
+      }
+
+      .bar-label {
+        font-weight: bold;
+        fill: #19747e;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body class="p-10 flex flex-col relative">
+    <div class="mb-6">
+      <h1
+        class="text-4xl font-extrabold font-montserrat title-gradient mb-2 py-2 leading-tight"
+      >
+        Resultados: Modelo 2 (Releases)
+      </h1>
+      <div class="flex items-center gap-4">
+        <div class="w-24 h-2 bg-teal-600 rounded-full"></div>
+        <span
+          class="text-sm font-semibold text-gray-500 bg-white px-2 py-1 rounded shadow-sm"
+        >
+          Qwen/Qwen3-Embedding-0.6B
+        </span>
+      </div>
+      <p class="text-gray-500 mt-2 text-sm">
+        Métrica: Similaridade de Cosseno (Estatística Estrutural)
+      </p>
+    </div>
+
+    <div class="flex gap-8 h-full pb-8">
+      <div class="w-3/4 glass-panel p-6">
+        <div id="chart" class="chart-container"></div>
+      </div>
+
+      <div class="w-1/4 flex flex-col gap-4">
+        <div
+          class="glass-panel p-6 bg-teal-50/50 border-l-4 border-teal-600 justify-center"
+        >
+          <h3 class="text-xl font-bold text-teal-800 mb-2">
+            <i class="fas fa-tag mr-2"></i>Vencedor
+          </h3>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            <strong>Semantic Versioning</strong> (0.5204).
+          </p>
+          <div class="mt-2 text-xs text-gray-500">
+            Embeddings detectam padrões de nomenclatura (v1.x.x) como forte
+            sinal estrutural.
+          </div>
+        </div>
+
+        <div
+          class="glass-panel p-6 bg-gray-50/50 border-l-4 border-gray-400 justify-center"
+        >
+          <h3 class="text-xl font-bold text-gray-700 mb-2">
+            <i class="fas fa-cogs mr-2"></i>Limitação
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            <strong>Release Train</strong> ficou em último (0.4498).
+          </p>
+          <div class="mt-2 text-xs text-gray-400">
+            Processos de gestão temporal são difíceis de capturar apenas com
+            embeddings de código estático.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-6 right-10 text-gray-400 font-bold text-xl opacity-60"
+    >
+      14
+    </div>
+
+    <script>
+      // Dados do PDF (Slide 6 - Releases)
+      const data = [
+        { strategy: "Semantic Versioning", score: 0.5204, color: "#19747E" }, // Vencedor
+        { strategy: "Ad-hoc Release", score: 0.4814, color: "#cbd5e1" },
+        { strategy: "Rolling Release", score: 0.4755, color: "#cbd5e1" },
+        { strategy: "Release Train", score: 0.4498, color: "#cbd5e1" }, // Perdeu aqui (mas venceu no Zero-Shot)
+      ];
+
+      // Configuração D3
+      const margin = { top: 40, right: 60, bottom: 40, left: 180 };
+      const width = 860 - margin.left - margin.right;
+      const height = 480 - margin.top - margin.bottom;
+
+      const svg = d3
+        .select("#chart")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      // Escalas (Foco na variação 0.4 - 0.6 para diferenciar visualmente)
+      const x = d3
+        .scaleLinear()
+        .domain([0, 0.6]) // Um pouco acima do máximo para dar respiro
+        .range([0, width]);
+
+      const y = d3
+        .scaleBand()
+        .range([0, height])
+        .domain(data.map((d) => d.strategy))
+        .padding(0.3);
+
+      // Eixo X
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).ticks(5))
+        .attr("class", "axis");
+
+      // Eixo Y
+      svg.append("g").call(d3.axisLeft(y)).attr("class", "axis");
+
+      // Linhas de Grade
+      svg
+        .append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickSize(-height).tickFormat(""))
+        .style("stroke-dasharray", "3,3")
+        .style("stroke-opacity", 0.1);
+
+      // Barras
+      svg
+        .selectAll("myRect")
+        .data(data)
+        .join("rect")
+        .attr("x", x(0))
+        .attr("y", (d) => y(d.strategy))
+        .attr("width", 0) // Animação
+        .attr("height", y.bandwidth())
+        .attr("fill", (d) => d.color)
+        .attr("rx", 6)
+        .transition()
+        .duration(1200)
+        .attr("width", (d) => x(d.score));
+
+      // Labels de Valor
+      svg
+        .selectAll("myLabels")
+        .data(data)
+        .join("text")
+        .attr("class", "bar-label")
+        .attr("x", (d) => x(d.score) + 10)
+        .attr("y", (d) => y(d.strategy) + y.bandwidth() / 2 + 5)
+        .text((d) => d.score.toFixed(4))
+        .attr("opacity", 0)
+        .transition()
+        .delay(1000)
+        .duration(500)
+        .attr("opacity", 1);
+    </script>
+  </body>
+</html>

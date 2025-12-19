@@ -1,200 +1,224 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Modelo 1 - Classificação por Texto</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resultados Modelo 1 - Classificação por Texto</title>
 
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
-            color: #333333;
-        }
-        .header-line {
-            height: 4px;
-            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
-        }
-        .info-card {
-            background-color: rgba(255, 255, 255, 0.7);
-            border-left: 4px solid #19747E;
-            transition: all 0.3s ease;
-        }
-        .info-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .model-flow {
-            position: relative;
-            height: 100px;
-        }
-    
-html {
-    overflow: hidden;
-}</style>
-</head>
-<body>
-<div class="slide p-10 flex flex-col" style=" overflow: hidden;">
-<!-- Header -->
-<div class="mb-4">
-<div class="header-line mb-3"></div>
-<h1 class="text-4xl font-bold text-gray-800 mb-2">Modelo 1 - Classificação por Texto</h1>
-<h2 class="text-xl text-gray-700 mb-3">BAAI/bge-reranker-v2-m3</h2>
-</div>
-<!-- Main Content -->
-<div class="flex-grow grid grid-cols-2 gap-5">
-<!-- Left Column -->
-<div class="flex flex-col space-y-3">
-<!-- Model Description -->
-<div class="info-card p-4 rounded-lg">
-<div class="flex items-start">
-<i class="fas fa-robot text-3xl text-gray-600 mr-4 mt-1"></i>
-<div>
-<h3 class="text-xl font-semibold text-gray-800 mb-1">Sobre o Modelo</h3>
-<p class="text-gray-700">Modelo de classificação por texto para analisar padrões em arquivos do repositório AnythingLLM.</p>
-</div>
-</div>
-</div>
-<!-- Input Data -->
-<div class="info-card p-4 rounded-lg">
-<div class="flex items-start">
-<i class="fas fa-file-code text-3xl text-gray-600 mr-4 mt-1"></i>
-<div>
-<h3 class="text-xl font-semibold text-gray-800 mb-1">Dados Analisados</h3>
-<ul class="list-disc pl-5 text-gray-700">
-<li>Arquivos brutos do repositório</li>
-<li>branches_overview.txt</li>
-<li>Logs de commits</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<!-- Right Column -->
-<div class="flex flex-col space-y-3">
-<!-- How it Works -->
-<div class="info-card p-4 rounded-lg">
-<div class="flex items-start">
-<i class="fas fa-cogs text-3xl text-gray-600 mr-4 mt-1"></i>
-<div>
-<h3 class="text-xl font-semibold text-gray-800 mb-1">Como Funciona</h3>
-<p class="text-gray-700 mb-1">Utiliza logits negativos para classificação (quanto mais próximo de 0, melhor).</p>
-<p class="text-gray-700">Compara padrões textuais com modelos de branching e release.</p>
-</div>
-</div>
-</div>
-<!-- Visualization -->
-<div class="info-card p-4 rounded-lg">
-<h3 class="text-xl font-semibold text-gray-800 mb-2">Fluxo de Processamento</h3>
-<div class="model-flow bg-white bg-opacity-50 rounded-lg p-3" id="model-flow">
-<!-- D3.js visualization will be placed here -->
-</div>
-</div>
-</div>
-</div>
-<!-- Example of Analysis Result Preview -->
-<div class="mt-4 bg-white bg-opacity-70 p-3 rounded-lg">
-<h3 class="text-lg font-semibold text-gray-800 mb-1">Exemplo de Resultado</h3>
-<div class="flex items-center justify-center">
-<div class="text-sm text-gray-700 mr-6">
-<i class="fas fa-code-branch text-gray-600 mr-2"></i> Gitflow: <span class="font-semibold">-3.5156</span>
-</div>
-<div class="text-sm text-gray-700 mr-6">
-<i class="fas fa-code-branch text-gray-600 mr-2"></i> GitLab Flow: <span class="font-semibold">-4.4922</span>
-</div>
-<div class="text-sm text-gray-700">
-<i class="fas fa-code-branch text-gray-600 mr-2"></i> GitHub Flow: <span class="font-semibold">-5.0820</span>
-</div>
-</div>
-</div>
-<!-- Footer with page number -->
-<div class="mt-4 flex justify-between items-center">
-<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
-<div class="text-sm text-gray-600" style="visibility: hidden;">6/24</div>
-</div>
-</div>
-<script>
-        // D3.js visualization for the model flow
-        document.addEventListener('DOMContentLoaded', function() {
-            const width = document.getElementById('model-flow').clientWidth;
-            const height = document.getElementById('model-flow').clientHeight;
-            
-            const svg = d3.select("#model-flow")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
-            
-            // Data for the flow
-            const data = [
-                { x: width * 0.1, y: height/2, icon: "\uf15c", text: "Arquivos" },  // file
-                { x: width * 0.4, y: height/2, icon: "\uf1c0", text: "Modelo" },          // database
-                { x: width * 0.7, y: height/2, icon: "\uf0cb", text: "Ranking" }           // list
-            ];
-            
-            // Arrows between elements
-            svg.append("defs").append("marker")
-                .attr("id", "arrow")
-                .attr("viewBox", "0 -5 10 10")
-                .attr("refX", 8)
-                .attr("refY", 0)
-                .attr("markerWidth", 6)
-                .attr("markerHeight", 6)
-                .attr("orient", "auto")
-                .append("path")
-                .attr("d", "M0,-5L10,0L0,5")
-                .attr("fill", "#19747E");
-            
-            // Draw arrows
-            svg.append("line")
-                .attr("x1", width * 0.15)
-                .attr("y1", height/2)
-                .attr("x2", width * 0.35)
-                .attr("y2", height/2)
-                .attr("stroke", "#19747E")
-                .attr("stroke-width", 2)
-                .attr("marker-end", "url(#arrow)");
-            
-            svg.append("line")
-                .attr("x1", width * 0.45)
-                .attr("y1", height/2)
-                .attr("x2", width * 0.65)
-                .attr("y2", height/2)
-                .attr("stroke", "#19747E")
-                .attr("stroke-width", 2)
-                .attr("marker-end", "url(#arrow)");
-            
-            // Add circles with icons
-            const nodes = svg.selectAll("g")
-                .data(data)
-                .enter()
-                .append("g")
-                .attr("transform", d => `translate(${d.x}, ${d.y})`);
-            
-            nodes.append("circle")
-                .attr("r", 22)
-                .attr("fill", "white")
-                .attr("stroke", "#19747E")
-                .attr("stroke-width", 2);
-            
-            nodes.append("text")
-                .attr("font-family", "FontAwesome")
-                .attr("font-size", "18px")
-                .attr("text-anchor", "middle")
-                .attr("dy", "0.3em")
-                .attr("fill", "#19747E")
-                .text(d => d.icon);
-            
-            nodes.append("text")
-                .attr("y", 34)
-                .attr("text-anchor", "middle")
-                .attr("font-size", "11px")
-                .attr("fill", "#333")
-                .text(d => d.text);
-        });
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-</body></html>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title-gradient {
+        background: linear-gradient(90deg, #19747e, #26a69a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Estilo das Barras de Ranking */
+      .rank-row {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.5);
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border-left: 4px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .rank-row:hover {
+        background: white;
+        transform: translateX(5px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .rank-1 {
+        border-left-color: #19747e;
+        background: rgba(25, 116, 126, 0.1);
+      }
+      .rank-2 {
+        border-left-color: #26a69a;
+      }
+      .rank-3 {
+        border-left-color: #fbbf24;
+      }
+      .rank-4 {
+        border-left-color: #ef4444;
+        opacity: 0.7;
+      }
+
+      .score-badge {
+        background: #e2e8f0;
+        color: #475569;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.9rem;
+        margin-left: auto;
+      }
+
+      .rank-number {
+        width: 24px;
+        height: 24px;
+        background: #cbd5e1;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.8rem;
+        margin-right: 12px;
+      }
+
+      .rank-1 .rank-number {
+        background: #19747e;
+      }
+    </style>
+  </head>
+  <body class="p-10 flex flex-col relative">
+    <div class="mb-6">
+      <h1
+        class="text-4xl font-extrabold font-montserrat title-gradient mb-2 py-2 leading-tight"
+      >
+        Resultados: Modelo 1
+      </h1>
+      <div class="flex items-center gap-4">
+        <div class="w-24 h-2 bg-teal-600 rounded-full"></div>
+        <span
+          class="text-sm font-semibold text-gray-500 bg-white px-2 py-1 rounded shadow-sm"
+        >
+          BAAI/bge-reranker-v2-m3
+        </span>
+      </div>
+      <p class="text-gray-500 mt-2 text-sm italic">
+        * Scores são Logits Negativos (quanto mais próximo de 0, melhor a
+        compatibilidade).
+      </p>
+    </div>
+
+    <div class="flex gap-8 h-full pb-8">
+      <div class="w-1/2 glass-panel p-6">
+        <div class="flex items-center mb-6">
+          <div class="p-3 bg-teal-100 rounded-lg text-teal-700 mr-4">
+            <i class="fas fa-code-branch text-2xl"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-800 font-montserrat">
+            Estratégia de Branching
+          </h2>
+        </div>
+
+        <div class="flex-grow overflow-y-auto pr-2">
+          <div class="rank-row rank-1">
+            <div class="rank-number">1</div>
+            <span class="font-bold text-gray-800">Gitflow</span>
+            <span class="score-badge font-bold text-teal-800">-3.5156</span>
+          </div>
+          <div class="rank-row rank-2">
+            <div class="rank-number">2</div>
+            <span class="font-semibold text-gray-700">GitLab Flow</span>
+            <span class="score-badge">-4.4922</span>
+          </div>
+          <div class="rank-row rank-3">
+            <div class="rank-number">3</div>
+            <span class="font-semibold text-gray-700">GitHub Flow</span>
+            <span class="score-badge">-5.0820</span>
+          </div>
+          <div class="rank-row rank-4">
+            <div class="rank-number">4</div>
+            <span class="text-gray-600">Trunk-Based</span>
+            <span class="score-badge">-7.0039</span>
+          </div>
+        </div>
+
+        <div
+          class="mt-4 p-3 bg-red-50 border border-red-100 rounded-lg text-xs text-red-700"
+        >
+          <i class="fas fa-exclamation-triangle mr-1"></i>
+          <strong>Atenção:</strong> O modelo priorizou termos literais (ex:
+          pastas), causando uma "alucinação" ao apontar Gitflow.
+        </div>
+      </div>
+
+      <div class="w-1/2 glass-panel p-6">
+        <div class="flex items-center mb-6">
+          <div class="p-3 bg-blue-100 rounded-lg text-blue-700 mr-4">
+            <i class="fas fa-tag text-2xl"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-800 font-montserrat">
+            Estratégia de Release
+          </h2>
+        </div>
+
+        <div class="flex-grow overflow-y-auto pr-2">
+          <div class="rank-row rank-1">
+            <div class="rank-number">1</div>
+            <span class="font-bold text-gray-800">Rolling Release</span>
+            <span class="score-badge font-bold text-teal-800">-4.6328</span>
+          </div>
+          <div class="rank-row rank-1">
+            <div class="rank-number">2</div>
+            <span class="font-bold text-gray-800">Semantic Versioning</span>
+            <span class="score-badge font-bold text-teal-800">-4.6797</span>
+          </div>
+          <div class="rank-row rank-3">
+            <div class="rank-number">3</div>
+            <span class="font-semibold text-gray-700">Ad-hoc Release</span>
+            <span class="score-badge">-5.5703</span>
+          </div>
+          <div class="rank-row rank-4">
+            <div class="rank-number">4</div>
+            <span class="text-gray-600">Release Train</span>
+            <span class="score-badge">-6.9180</span>
+          </div>
+        </div>
+
+        <div
+          class="mt-4 p-3 bg-blue-50 border border-blue-100 rounded-lg text-xs text-blue-700"
+        >
+          <i class="fas fa-info-circle mr-1"></i>
+          <strong>Análise:</strong> Empate técnico entre Rolling Release e
+          SemVer, indicando confusão do modelo entre entrega contínua e
+          versionamento.
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-6 right-10 text-gray-400 font-bold text-xl opacity-60"
+    >
+      06
+    </div>
+  </body>
+</html>

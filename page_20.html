@@ -1,182 +1,224 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Análise Crítica - Releases</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; min-height: 720px; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
-            color: #333333;
-        }
-        .header-line {
-            height: 4px;
-            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
-        }
-        .analysis-card {
-            background-color: rgba(255, 255, 255, 0.7);
-            border-left: 4px solid #19747E;
-        }
-        .bar-chart-container {
-            height: 200px;
-        }
-        .bar {
-            fill: #19747E;
-            opacity: 0.8;
-        }
-        .bar:hover {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
-<div class="slide p-10 flex flex-col">
-<!-- Header -->
-<div class="mb-6">
-<div class="header-line mb-4"></div>
-<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Análise Crítica - Releases</h1>
-</div>
-<!-- Main Content -->
-<div class="flex-grow grid grid-cols-2 gap-6">
-<!-- Left Column - Key Findings -->
-<div class="flex flex-col space-y-4">
-<div class="analysis-card p-4 rounded-lg shadow-sm">
-<div class="flex items-center mb-2">
-<i class="fas fa-train text-2xl text-gray-600 mr-3"></i>
-<h3 class="text-xl font-semibold">Release Train</h3>
-</div>
-<p>Strategy de gestão com alta pontuação no Modelo 3 (mDeBERTa): 0.7988</p>
-<p class="mt-2">Caracteriza-se por previsibilidade e coordenação das entregas</p>
-</div>
-<div class="analysis-card p-4 rounded-lg shadow-sm">
-<div class="flex items-center mb-2">
-<i class="fas fa-code-branch text-2xl text-gray-600 mr-3"></i>
-<h3 class="text-xl font-semibold">Semantic Versioning</h3>
-</div>
-<p>Aparece forte em todos os modelos, especialmente nos modelos 1 e 2</p>
-<p class="mt-2">Ferramenta de nomenclatura padrão usada no projeto</p>
-</div>
-<div class="analysis-card p-4 rounded-lg shadow-sm">
-<div class="flex items-center mb-2">
-<i class="fas fa-chart-line text-2xl text-gray-600 mr-3"></i>
-<h3 class="text-xl font-semibold">Modelos de Análise</h3>
-</div>
-<ul class="list-disc list-inside">
-<li>Modelo 1 (BAAI): Rolling Release (-4.63)</li>
-<li>Modelo 2 (Qwen): Semantic Versioning (0.52)</li>
-<li>Modelo 3 (mDeBERTa): Release Train (0.79)</li>
-</ul>
-</div>
-</div>
-<!-- Right Column - Chart and Analysis -->
-<div class="flex flex-col space-y-4">
-<!-- Chart -->
-<div class="bg-white bg-opacity-70 p-4 rounded-lg shadow-sm">
-<h3 class="text-xl font-semibold mb-2 text-center">Comparativo de Scores por Strategy</h3>
-<div class="bar-chart-container" id="chart"></div>
-</div>
-<!-- Critical Analysis -->
-<div class="bg-white bg-opacity-70 p-4 rounded-lg shadow-sm">
-<h3 class="text-xl font-semibold mb-2">Análise Crítica</h3>
-<ul class="space-y-2">
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
-<span>Release Train é a estratégia de gestão com previsibilidade</span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
-<span>Semantic Versioning é a ferramenta de nomenclatura padrão</span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
-<span>Modelo 3 (mDeBERTa) destaca Release Train como superior</span>
-</li>
-<li class="flex items-start">
-<i class="fas fa-check-circle text-green-600 mt-1 mr-2"></i>
-<span>Resultados validam a abordagem adotada no projeto</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<!-- Footer with page number -->
-<div class="mt-6 flex justify-between items-center">
-<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
-<div class="text-sm text-gray-600" style="visibility: hidden;">20/24</div>
-</div>
-</div>
-<script>
-        // Data from the document
-        const data = [
-            {strategy: "Release Train", score: 0.7988},
-            {strategy: "Semantic Versioning", score: 0.5834},
-            {strategy: "Rolling Release", score: 0.1941},
-            {strategy: "Ad-hoc Release", score: 0.0168}
-        ];
-        
-        // Set up the chart dimensions
-        const margin = {top: 20, right: 20, bottom: 50, left: 50};
-        const width = 500 - margin.left - margin.right;
-        const height = 200 - margin.top - margin.bottom;
-        
-        // Create the SVG container
-        const svg = d3.select("#chart")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
-        
-        // Set up scales
-        const x = d3.scaleBand()
-            .domain(data.map(d => d.strategy))
-            .range([0, width])
-            .padding(0.3);
-        
-        const y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.score) * 1.1])
-            .range([height, 0]);
-        
-        // Add X axis
-        svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x))
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-25)");
-        
-        // Add Y axis
-        svg.append("g")
-            .call(d3.axisLeft(y));
-        
-        // Add bars
-        svg.selectAll(".bar")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr("class", "bar")
-            .attr("x", d => x(d.strategy))
-            .attr("width", x.bandwidth())
-            .attr("y", d => y(d.score))
-            .attr("height", d => height - y(d.score));
-        
-        // Add labels on top of bars
-        svg.selectAll(".label")
-            .data(data)
-            .enter()
-            .append("text")
-            .attr("class", "label")
-            .attr("x", d => x(d.strategy) + x.bandwidth() / 2)
-            .attr("y", d => y(d.score) - 5)
-            .attr("text-anchor", "middle")
-            .text(d => d.score.toFixed(2));
-    </script>
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análise Crítica - Releases</title>
 
-</body></html>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title-gradient {
+        background: linear-gradient(90deg, #19747e, #26a69a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Estilos de Cards de Análise */
+      .insight-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1rem;
+        border-left: 5px solid #ccc;
+        transition: transform 0.2s;
+      }
+
+      .insight-card:hover {
+        transform: translateX(5px);
+      }
+
+      .border-red {
+        border-left-color: #ef4444;
+      }
+      .border-yellow {
+        border-left-color: #fbbf24;
+      }
+      .border-green {
+        border-left-color: #19747e;
+      }
+
+      /* Barra de Progresso Customizada */
+      .progress-container {
+        width: 100%;
+        background-color: #e2e8f0;
+        border-radius: 9999px;
+        height: 10px;
+        margin-top: 8px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        border-radius: 9999px;
+        transition: width 1s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="p-10 flex flex-col relative">
+    <div class="mb-8">
+      <h1
+        class="text-4xl font-extrabold font-montserrat title-gradient mb-2 py-2 leading-tight"
+      >
+        Análise Crítica: Releases
+      </h1>
+      <div class="w-24 h-2 bg-teal-600 rounded-full"></div>
+      <p class="text-gray-500 mt-2 text-lg">
+        Dificuldades em distinguir Processo vs. Versionamento
+      </p>
+    </div>
+
+    <div class="flex gap-10 h-full pb-8">
+      <div class="w-1/2 flex flex-col gap-2">
+        <h3
+          class="text-gray-400 font-bold uppercase tracking-widest text-sm mb-4"
+        >
+          Pontos de Confusão
+        </h3>
+
+        <div class="insight-card border-red flex-1">
+          <div class="flex items-center mb-2">
+            <div
+              class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-500 mr-3"
+            >
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800">
+              Ilusão de Frequência
+            </h4>
+          </div>
+          <p class="text-gray-600 text-sm mb-2">
+            O <strong>Modelo 1 (Texto)</strong> focou apenas na alta taxa de
+            commits/merges.
+          </p>
+          <div class="bg-red-50 p-2 rounded text-xs text-red-700">
+            Erro: "Muito commit rápido = Rolling Release". Ignorou o
+            congelamento pré-release.
+          </div>
+        </div>
+
+        <div class="insight-card border-yellow flex-1">
+          <div class="flex items-center mb-2">
+            <div
+              class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-3"
+            >
+              <i class="fas fa-tags"></i>
+            </div>
+            <h4 class="text-lg font-bold text-gray-800">
+              Viés de Nomenclatura
+            </h4>
+          </div>
+          <p class="text-gray-600 text-sm mb-2">
+            O <strong>Modelo 2 (Embeddings)</strong> identificou fortemente o
+            padrão <code>vX.Y.Z</code>.
+          </p>
+          <div class="bg-yellow-50 p-2 rounded text-xs text-yellow-700">
+            Limitação: Semantic Versioning é uma técnica, não a estratégia de
+            release completa.
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="w-1/2 glass-panel p-8 bg-teal-50/30 border-t-4 border-teal-600"
+      >
+        <h3
+          class="text-teal-800 font-bold uppercase tracking-widest text-sm mb-6"
+        >
+          A Inteligência do Contexto
+        </h3>
+
+        <div class="mb-8">
+          <div class="flex items-center mb-4">
+            <i class="fas fa-lightbulb text-4xl text-teal-600 mr-4"></i>
+            <h2 class="text-2xl font-bold text-gray-800 font-montserrat">
+              Inferência Abstrata
+            </h2>
+          </div>
+          <p class="text-gray-700 text-lg leading-relaxed">
+            Apenas o modelo <strong>Zero-Shot</strong> conectou os pontos:
+            <br />
+            <span class="italic text-teal-700"
+              >"Janelas de lançamento coordenadas"</span
+            >
+            +
+            <span class="italic text-teal-700">"Code Freeze"</span>
+            =
+            <strong class="mx-1 text-teal-800">Release Train</strong>.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <p class="text-xs font-bold text-gray-400 uppercase mb-4">
+            Probabilidade (Modelo 3)
+          </p>
+
+          <div class="mb-4">
+            <div class="flex justify-between text-sm mb-1">
+              <span class="font-bold text-teal-800">Release Train</span>
+              <span class="font-bold text-teal-800">49.2%</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bar bg-teal-600" style="width: 49.2%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="font-bold text-blue-400">Semantic Versioning</span>
+              <span class="font-bold text-blue-400">38.5%</span>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bar bg-blue-300" style="width: 38.5%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-auto text-right">
+          <span
+            class="bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-bold text-sm"
+          >
+            <i class="fas fa-check-circle mr-2"></i>Veredito: Release Train
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-6 right-10 text-gray-400 font-bold text-xl opacity-60"
+    >
+      20
+    </div>
+  </body>
+</html>

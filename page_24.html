@@ -1,107 +1,228 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Considerações Finais e Aprendizados</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; min-height: 720px; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E2 100%);
-            color: #333333;
-        }
-        .header-line {
-            height: 4px;
-            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
-        }
-        .learning-card {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-left: 4px solid #19747E;
-            transition: all 0.3s ease;
-        }
-        .learning-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        .icon-circle {
-            background-color: #19747E;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            flex-shrink: 0;
-        }
-    </style>
-</head>
-<body>
-<div class="slide p-10 flex flex-col">
-<!-- Header -->
-<div class="mb-6">
-<div class="header-line mb-4"></div>
-<h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Considerações Finais e Aprendizados</h1>
-</div>
-<!-- Main Content - Learnings -->
-<div class="flex-grow grid grid-cols-2 gap-6">
-<!-- Learning 1 -->
-<div class="learning-card p-4 rounded-lg shadow-md flex">
-<div class="icon-circle mr-4">
-<i class="fas fa-robot text-xl"></i>
-</div>
-<div>
-<h3 class="text-xl font-semibold mb-2">Múltiplas Abordagens</h3>
-<p>Combinar Classificação por Texto, Embeddings Técnicos e Zero-Shot Classification proporciona uma análise mais completa e robusta das estratégias de desenvolvimento.</p>
-</div>
-</div>
-<!-- Learning 2 -->
-<div class="learning-card p-4 rounded-lg shadow-md flex">
-<div class="icon-circle mr-4">
-<i class="fas fa-code-branch text-xl"></i>
-</div>
-<div>
-<h3 class="text-xl font-semibold mb-2">GitHub Flow Adotado</h3>
-<p>O projeto adota o GitHub Flow, priorizando agilidade, integração contínua na master e pull requests rápidos, validando a eficácia da análise automática.</p>
-</div>
-</div>
-<!-- Learning 3 -->
-<div class="learning-card p-4 rounded-lg shadow-md flex">
-<div class="icon-circle mr-4">
-<i class="fas fa-tag text-xl"></i>
-</div>
-<div>
-<h3 class="text-xl font-semibold mb-2">Release Train</h3>
-<p>As entregas coordenadas e previsíveis confirmam que o Release Train é a estratégia de gestão mais adequada ao projeto, rejeitando modelos puramente contínuos ou improvisados.</p>
-</div>
-</div>
-<!-- Learning 4 -->
-<div class="learning-card p-4 rounded-lg shadow-md flex">
-<div class="icon-circle mr-4">
-<i class="fas fa-balance-scale text-xl"></i>
-</div>
-<div>
-<h3 class="text-xl font-semibold mb-2">Governança Equilibrada</h3>
-<p>Existe um equilíbrio claro entre a velocidade de desenvolvimento e o controle de versão padronizado, fundamental para projetos de IA com LLMs.</p>
-</div>
-</div>
-</div>
-<!-- Conclusion Statement -->
-<div class="mt-6 bg-white bg-opacity-70 p-4 rounded-lg shadow-sm">
-<p class="text-center text-lg">
-<i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
-                A análise com LLMs demonstrou ser uma ferramenta poderosa para estratégias de desenvolvimento, 
-                especialmente quando combinada com auditoria manual e conhecimento técnico.
-            </p>
-</div>
-<!-- Footer with page number -->
-<div class="mt-4 flex justify-between items-center">
-<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
-<div class="text-sm text-gray-600" style="visibility: hidden;">24/24</div>
-</div>
-</div>
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encerramento e Referências</title>
 
-</body></html>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 2rem;
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
+
+      .title-gradient {
+        background: linear-gradient(90deg, #19747e, #26a69a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Card de Ferramentas */
+      .tech-badge {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 10px 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+        margin-bottom: 10px;
+        transition: transform 0.2s;
+      }
+      .tech-badge:hover {
+        transform: translateX(5px);
+        border-color: #19747e;
+      }
+
+      .tech-icon {
+        width: 30px;
+        text-align: center;
+        margin-right: 10px;
+        font-size: 1.2rem;
+      }
+
+      /* Avatar Placeholder */
+      .avatar-circle {
+        width: 80px;
+        height: 80px;
+        background: #cbd5e1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        border: 4px solid white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+      }
+
+      .repo-link {
+        background: #24292e;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+      .repo-link:hover {
+        background: #000;
+      }
+    </style>
+  </head>
+  <body class="p-12 flex flex-col items-center justify-center relative">
+    <div class="text-center mb-12">
+      <h1
+        class="text-6xl font-extrabold font-montserrat title-gradient mb-4 py-2 leading-tight"
+      >
+        Obrigado!
+      </h1>
+      <p class="text-xl text-gray-600">
+        Análise Arquitetural Automatizada com LLMs
+      </p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-10 w-full max-w-5xl">
+      <div class="glass-panel">
+        <h3
+          class="text-gray-400 font-bold uppercase tracking-widest text-xs mb-6"
+        >
+          Stack & Modelos
+        </h3>
+
+        <div class="tech-badge">
+          <div class="tech-icon text-yellow-500">
+            <i class="fas fa-python"></i>
+          </div>
+          <div>
+            <div class="font-bold text-gray-800">Python + LangChain</div>
+            <div class="text-xs text-gray-500">Orquestração</div>
+          </div>
+        </div>
+
+        <div class="tech-badge">
+          <div class="tech-icon text-yellow-600">
+            <i class="fas fa-smile"></i>
+          </div>
+          <div>
+            <div class="font-bold text-gray-800">Hugging Face</div>
+            <div class="text-xs text-gray-500">Model Hub</div>
+          </div>
+        </div>
+
+        <div class="tech-badge">
+          <div class="tech-icon text-teal-600">
+            <i class="fas fa-project-diagram"></i>
+          </div>
+          <div>
+            <div class="font-bold text-gray-800">mDeBERTa (Zero-Shot)</div>
+            <div class="text-xs text-gray-500">Modelo Vencedor</div>
+          </div>
+        </div>
+
+        <div class="tech-badge">
+          <div class="tech-icon text-orange-500">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <div>
+            <div class="font-bold text-gray-800">D3.js</div>
+            <div class="text-xs text-gray-500">Visualização de Dados</div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="glass-panel flex flex-col items-center justify-center text-center scale-105 z-10 border-teal-200 shadow-teal-100"
+      >
+        <div
+          class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center text-teal-600 text-3xl mb-4"
+        >
+          <i class="fas fa-search-location"></i>
+        </div>
+
+        <h3 class="text-2xl font-bold text-gray-800 mb-2">AnythingLLM</h3>
+        <p class="text-gray-500 text-sm mb-6 px-4">
+          "An all-in-one desktop application and private server for LLMs."
+        </p>
+
+        <a
+          href="https://github.com/Mintplex-Labs/anything-llm"
+          target="_blank"
+          class="repo-link"
+        >
+          <i class="fab fa-github mr-2 text-xl"></i>
+          Ver Repositório
+        </a>
+
+        <div class="mt-6 text-xs text-gray-400">
+          <i class="fas fa-clock mr-1"></i> Auditoria: Nov/Dez 2025
+        </div>
+      </div>
+
+      <div
+        class="glass-panel flex flex-col items-center justify-center text-center"
+      >
+        <h3
+          class="text-gray-400 font-bold uppercase tracking-widest text-xs mb-6 w-full text-left"
+        >
+          Apresentção Desenvolvido Por
+        </h3>
+
+        <div class="avatar-circle bg-gradient-to-br from-teal-400 to-blue-500">
+          <i class="fas fa-user"></i>
+        </div>
+        <h4 class="text-xl font-bold text-gray-800">Guilherme Menezes</h4>
+        <p class="text-sm text-gray-500 mb-4">Engenharia de Software</p>
+
+        <div class="w-full border-t border-gray-200 my-4"></div>
+
+        <p class="text-xs text-gray-400 italic">
+          "A inteligência artificial não substitui a análise humana, mas a
+          potencializa."
+        </p>
+      </div>
+    </div>
+
+    <div class="absolute bottom-6 w-full text-center opacity-60">
+      <p class="text-gray-500 text-sm font-semibold">
+        Atividade 2 - Engenharia de Software | 2025.2
+      </p>
+    </div>
+
+    <div
+      class="absolute bottom-6 right-10 text-gray-400 font-bold text-xl opacity-60"
+    >
+      24
+    </div>
+  </body>
+</html>

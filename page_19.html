@@ -1,245 +1,209 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Comparativo Consolidado - Releases</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; min-height: 720px; overflow: hidden; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background: linear-gradient(135deg, #D1E8E2 0%, #E8E8E8 100%);
-            color: #333333;
-        }
-        .header-line {
-            height: 4px;
-            background: linear-gradient(90deg, #19747E 0%, #D1E8E2 100%);
-        }
-        .table-header {
-            background-color: #19747E;
-            color: white;
-        }
-        .table-row:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-        .table-row:nth-child(odd) {
-            background-color: rgba(255, 255, 255, 0.4);
-        }
-        .table-row:hover {
-            background-color: rgba(25, 116, 126, 0.2);
-        }
-        .strategy-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            font-weight: bold;
-        }
-        .rank-1 {
-            background-color: #FFD700;
-            color: #333;
-        }
-        .rank-2 {
-            background-color: #C0C0C0;
-            color: #333;
-        }
-        .rank-3 {
-            background-color: #CD7F32;
-            color: #fff;
-        }
-        .rank-4 {
-            background-color: #696969;
-            color: #fff;
-        }
-    
-html {
-    overflow: hidden;
-}</style>
-</head>
-<body>
-<div class="slide p-8 flex flex-col" style=" overflow: hidden;">
-<!-- Header -->
-<div class="mb-3">
-<div class="header-line mb-3"></div>
-<h1 class="text-4xl font-bold text-center text-gray-800 mb-1">Comparativo Consolidado - Releases</h1>
-<p class="text-xl text-center text-gray-700 mb-2">Consolidação das abordagens para Releases</p>
-</div>
-<!-- Main Content -->
-<div class="flex flex-col items-center mb-2">
-<!-- Table -->
-<div class="w-full max-w-4xl mb-3">
-<table class="w-full border-collapse">
-<thead>
-<tr class="table-header">
-<th class="py-2 px-4 text-left">Classificação</th>
-<th class="py-2 px-4 text-center">
-<div class="flex items-center justify-center">
-<i class="fas fa-robot mr-2"></i>
-                                    Modelo 1 (BAAI)
-                                </div>
-</th>
-<th class="py-2 px-4 text-center">
-<div class="flex items-center justify-center">
-<i class="fas fa-robot mr-2"></i>
-                                    Modelo 2 (Qwen)
-                                </div>
-</th>
-<th class="py-2 px-4 text-center">
-<div class="flex items-center justify-center">
-<i class="fas fa-robot mr-2"></i>
-                                    Modelo 3 (mDeBERTa)
-                                </div>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr class="table-row">
-<td class="py-2 px-4 font-semibold">
-<div class="flex items-center">
-<i class="fas fa-trophy text-yellow-500 mr-2"></i>
-                                    1º Lugar
-                                </div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-1">Rolling Release</span>
-<div class="text-sm text-gray-600">(-4.63)</div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-2">Semantic Versioning</span>
-<div class="text-sm text-gray-600">(0.52)</div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-1">Release Train</span>
-<div class="text-sm text-gray-600">(0.79)</div>
-</td>
-</tr>
-<tr class="table-row">
-<td class="py-2 px-4 font-semibold">
-<div class="flex items-center">
-<i class="fas fa-medal text-gray-300 mr-2"></i>
-                                    2º Lugar
-                                </div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-2">Semantic Versioning</span>
-<div class="text-sm text-gray-600">(-4.68)</div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-3">Ad-hoc Release</span>
-<div class="text-sm text-gray-600">(0.48)</div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-2">Semantic Versioning</span>
-<div class="text-sm text-gray-600">(0.58)</div>
-</td>
-</tr>
-<tr class="table-row">
-<td class="py-2 px-4 font-semibold">
-<div class="flex items-center">
-<i class="fas fa-medal text-amber-700 mr-2"></i>
-                                    3º Lugar
-                                </div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-3">Ad-hoc Release</span>
-<div class="text-sm text-gray-600">(-5.57)</div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-4">Rolling Release</span>
-<div class="text-sm text-gray-600">(0.48)</div>
-</td>
-<td class="py-2 px-4 text-center">
-<span class="strategy-badge rank-3">Rolling Release</span>
-<div class="text-sm text-gray-600">(0.19)</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Visualization -->
-<div class="w-full max-w-4xl h-32" id="chart"></div>
-</div>
-<!-- Analysis -->
-<div class="bg-white bg-opacity-70 p-3 rounded-lg shadow-sm mb-2">
-<p class="text-lg"><i class="fas fa-chart-line text-gray-700 mr-2"></i><strong>Análise:</strong> Release Train é a estratégia de gestão (previsibilidade). Semantic Versioning aparece forte em todos pois é a ferramenta de nomenclatura usada no projeto.</p>
-</div>
-<!-- Footer with page number -->
-<div class="mt-auto flex justify-between items-center">
-<div class="text-sm text-gray-600">Análise de Estratégias de Branching e Release</div>
-<div class="text-sm text-gray-600" style="visibility: hidden;">19/24</div>
-</div>
-</div>
-<script>
-        // D3.js visualization
-        const data = [
-            {strategy: "Rolling Release", model1: -4.63, model2: 0.48, model3: 0.19, normalized: 4.63},
-            {strategy: "Semantic Versioning", model1: -4.68, model2: 0.52, model3: 0.58, normalized: 4.68},
-            {strategy: "Ad-hoc Release", model1: -5.57, model2: 0.48, model3: 0.0168, normalized: 5.57},
-            {strategy: "Release Train", model1: -6.91, model2: 0.45, model3: 0.79, normalized: 6.91}
-        ];
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparativo Consolidado - Releases</title>
 
-        const margin = {top: 10, right: 30, bottom: 30, left: 150};
-        const width = 800 - margin.left - margin.right;
-        const height = 120 - margin.top - margin.bottom;
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        const svg = d3.select("#chart")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
 
-        // Add X axis
-        const x = d3.scaleLinear()
-            .domain([0, 7])
-            .range([0, width]);
-        
-        svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x))
-            .selectAll("text")
-            .style("text-anchor", "middle");
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
-        // Y axis
-        const y = d3.scaleBand()
-            .domain(data.map(d => d.strategy))
-            .range([0, height])
-            .padding(0.2);
-        
-        svg.append("g")
-            .call(d3.axisLeft(y))
-            .selectAll("text")
-            .style("font-size", "12px");
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
 
-        // Add bars
-        svg.selectAll("bars")
-            .data(data)
-            .join("rect")
-            .attr("x", 0)
-            .attr("y", d => y(d.strategy))
-            .attr("width", d => x(d.normalized))
-            .attr("height", y.bandwidth())
-            .attr("fill", d => {
-                if (d.strategy === "Release Train") return "#19747E";
-                if (d.strategy === "Semantic Versioning") return "#4A90E2";
-                if (d.strategy === "Rolling Release") return "#50C878";
-                return "#888888";
-            })
-            .attr("opacity", 0.8);
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        height: 100%;
+        transition: transform 0.3s ease;
+      }
 
-        // Add labels
-        svg.selectAll("labels")
-            .data(data)
-            .join("text")
-            .attr("x", d => x(d.normalized) + 5)
-            .attr("y", d => y(d.strategy) + y.bandwidth()/2)
-            .attr("dy", "0.35em")
-            .text(d => d.normalized.toFixed(2))
-            .style("font-size", "12px")
-            .style("fill", "#333");
-    </script>
+      .glass-panel:hover {
+        transform: translateY(-5px);
+      }
 
-</body></html>
+      .title-gradient {
+        background: linear-gradient(90deg, #19747e, #26a69a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .truth-badge {
+        background: #19747e;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .result-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        padding: 1.5rem;
+        border-top: 6px solid transparent;
+      }
+
+      .result-success {
+        border-top-color: #19747e;
+        background: linear-gradient(to bottom, #f0fdfa, white);
+      }
+      .result-partial {
+        border-top-color: #f59e0b;
+        background: linear-gradient(to bottom, #fffbeb, white);
+      }
+      .result-error {
+        border-top-color: #ef4444;
+        background: linear-gradient(to bottom, #fef2f2, white);
+      }
+
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body class="p-10 flex flex-col relative">
+    <div class="mb-8 flex justify-between items-end">
+      <div>
+        <h1
+          class="text-4xl font-extrabold font-montserrat title-gradient mb-2 py-2 leading-tight"
+        >
+          Comparativo Consolidado: Releases
+        </h1>
+        <div class="w-32 h-2 bg-teal-600 rounded-full"></div>
+      </div>
+
+      <div class="truth-badge shadow-lg">
+        <i class="fas fa-train mr-2"></i>
+        Verdade Terrestre: Release Train
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-8 h-full pb-8">
+      <div class="glass-panel overflow-hidden">
+        <div class="result-card result-error">
+          <div
+            class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2"
+          >
+            Modelo 1: Texto
+          </div>
+
+          <div class="icon-circle bg-red-100 text-red-600">
+            <i class="fas fa-random"></i>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-800 mb-1">Rolling / SemVer</h3>
+          <p class="text-red-500 font-bold text-sm mb-4">Empate / Confusão</p>
+
+          <div
+            class="mt-auto bg-white p-4 rounded-lg shadow-sm border border-red-100 text-sm text-gray-600"
+          >
+            <p>
+              <strong>Falha:</strong> Confundiu a alta frequência de commits
+              (Rolling) com a presença de tags de versão (SemVer). Não detectou
+              a coordenação.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel overflow-hidden">
+        <div class="result-card result-partial">
+          <div
+            class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2"
+          >
+            Modelo 2: Embeddings
+          </div>
+
+          <div class="icon-circle bg-yellow-100 text-yellow-600">
+            <i class="fas fa-tag"></i>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-800 mb-1">Semantic Ver.</h3>
+          <p class="text-yellow-600 font-bold text-sm mb-4">Visão Parcial</p>
+
+          <div
+            class="mt-auto bg-white p-4 rounded-lg shadow-sm border border-yellow-100 text-sm text-gray-600"
+          >
+            <p>
+              <strong>Limitação:</strong> Identificou corretamente o padrão de
+              tags (v1.x), mas não conseguiu inferir o processo de gestão (o
+              "trem" de entrega).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel overflow-hidden relative">
+        <div
+          class="absolute top-0 right-0 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-bl-lg shadow-sm"
+        >
+          <i class="fas fa-star mr-1"></i>Melhor Resultado
+        </div>
+
+        <div class="result-card result-success">
+          <div
+            class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2"
+          >
+            Modelo 3: Zero-Shot
+          </div>
+
+          <div class="icon-circle bg-teal-600 text-white shadow-lg">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-800 mb-1">Release Train</h3>
+          <p class="text-teal-600 font-bold text-sm mb-4">Resultado Correto</p>
+
+          <div
+            class="mt-auto bg-white p-4 rounded-lg shadow-sm border border-teal-100 text-sm text-gray-600"
+          >
+            <p>
+              <strong>Inteligência:</strong> Compreendeu que "janelas de
+              lançamento coordenadas" descrevem o processo melhor do que apenas
+              o versionamento.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-6 right-10 text-gray-400 font-bold text-xl opacity-60"
+    >
+      19
+    </div>
+  </body>
+</html>

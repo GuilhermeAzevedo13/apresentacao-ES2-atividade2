@@ -1,98 +1,100 @@
-<!DOCTYPE html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Análise de Estratégias de Branching e Release</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-<script src="https://picture-search.skywork.ai/aippt/static/tailwindcss.com"></script><style>
-        body {width: 1280px; height: 720px; margin: 0;
-            padding: 0;}
-        .slide {
-            width: 1280px;
-            height: 720px;
-            position: relative;
-            background-color: #D1E8E2;
-            
-        }
-        .title {
-            font-family: 'Roboto', sans-serif;
-            font-weight: bold;
-            color: #19747E;
-        }
-        .subtitle {
-            font-family: 'Open Sans', sans-serif;
-            color: #333333;
-        }
-        .text-main {
-            font-family: 'Open Sans', sans-serif;
-            color: #000000;
-        }
-        .geometric-shape {
-            position: absolute;
-            background-color: rgba(25, 116, 126, 0.1);
-            border-radius: 50%;
-            z-index: 1;
-        }
-        .code-element {
-            position: absolute;
-            color: rgba(25, 116, 126, 0.2);
-            font-size: 24px;
-            z-index: 1;
-        }
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Capa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+        font-family: "Open Sans", sans-serif;
+      }
+      h1,
+      h2 {
+        font-family: "Montserrat", sans-serif;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
     </style>
-</head>
-<body>
-<div class="slide flex flex-col justify-between p-16 relative">
-<!-- Geometric background elements -->
-<div class="geometric-shape" style="width: 300px; height: 300px; top: -50px; right: -50px; opacity: 0.5;"></div>
-<div class="geometric-shape" style="width: 200px; height: 200px; bottom: 100px; left: -50px; opacity: 0.3;"></div>
-<div class="geometric-shape" style="width: 150px; height: 150px; top: 200px; right: 200px; opacity: 0.2;"></div>
-<!-- Code elements -->
-<div class="code-element" style="top: 100px; left: 200px;"><i class="fas fa-code-branch"></i></div>
-<div class="code-element" style="top: 300px; right: 150px;"><i class="fas fa-code-branch"></i></div>
-<div class="code-element" style="bottom: 150px; left: 300px;"><i class="fas fa-code-branch"></i></div>
-<div class="code-element" style="top: 200px; right: 300px;"><i class="fas fa-code"></i></div>
-<div class="code-element" style="bottom: 200px; right: 200px;"><i class="fas fa-terminal"></i></div>
-<!-- Header with title -->
-<div class="z-10">
-<h1 class="title text-5xl mb-4">Análise de Estratégias de Branching e Release</h1>
-<h2 class="subtitle text-2xl mb-8">Estudo de Caso com LLMs no Projeto AnythingLLM</h2>
-</div>
-<!-- Middle section with project info -->
-<div class="flex flex-col items-start z-10">
-<div class="flex items-center mb-3">
-<i class="fas fa-repository text-xl text-gray-700 mr-3"></i>
-<span class="text-main text-xl">Repositório: Mintplex-Labs/anything-llm</span>
-</div>
-<div class="flex items-center mb-3">
-<i class="fas fa-code-branch text-xl text-gray-700 mr-3"></i>
-<span class="text-main text-xl">Branching: GitHub Flow</span>
-</div>
-<div class="flex items-center">
-<i class="fas fa-tag text-xl text-gray-700 mr-3"></i>
-<span class="text-main text-xl">Releases: Release Train</span>
-</div>
-</div>
-<!-- Footer with context and team info -->
-<div class="z-10">
-<div class="mb-6">
-<p class="text-main text-xl mb-1">Contexto: Engenharia de Software II - Universidade Federal de Sergipe (UFS)</p>
-<p class="text-main text-lg">Orientador: Prof. Glauco de Figueiredo Carneiro</p>
-</div>
-<div class="border-t border-gray-400 pt-4">
-<p class="text-main text-xl">Equipe 3</p>
-<div class="grid grid-cols-2 gap-x-8 gap-y-1 mt-2">
-<div class="text-main text-lg">Ana Vitória Bizo (202200025401)</div>
-<div class="text-main text-lg">Carlos Augusto (202200025448)</div>
-<div class="text-main text-lg">Guilherme Viana (202200092450)</div>
-<div class="text-main text-lg">Guilherme Menezes (202200025804)</div>
-<div class="text-main text-lg">João Guilherme (202200014711)</div>
-<div class="text-main text-lg">Ravi Ribeiro (202300061779)</div>
-<div class="text-main text-lg">Ricardo Nabuco (202300038903)</div>
-<div class="text-main text-lg">Uilson Alves (201900115954)</div>
-</div>
-</div>
-</div>
-</div>
+  </head>
+  <body class="flex items-center justify-center">
+    <div
+      class="glass-card w-11/12 h-5/6 flex flex-col items-center justify-center p-12 text-center relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-teal-700 to-teal-400"
+      ></div>
 
-</body></html>
+      <div class="mb-8">
+        <span
+          class="bg-teal-100 text-teal-800 py-1 px-4 rounded-full text-sm font-bold tracking-wide uppercase"
+          >Engenharia de Software II</span
+        >
+      </div>
+
+      <h1 class="text-6xl font-extrabold text-gray-800 mb-4 leading-tight">
+        Análise de Estratégias<br />
+        <span class="text-teal-700">Branching & Release</span>
+      </h1>
+
+      <p class="text-2xl text-gray-600 mb-12 max-w-3xl">
+        Um estudo de caso sobre o projeto
+        <strong>AnythingLLM</strong> utilizando Inteligência Artificial
+      </p>
+
+      <div
+        class="grid grid-cols-2 gap-x-12 gap-y-4 text-left bg-white/50 p-8 rounded-xl border border-gray-200"
+      >
+        <div>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>Ana Vitória Bizo
+          </p>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>Carlos Augusto
+          </p>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>Guilherme Viana
+          </p>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>Guilherme Menezes
+          </p>
+        </div>
+        <div>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>João Guilherme Alves
+          </p>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>Ravi Ribeiro Proença
+          </p>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>Ricardo Nabuco
+          </p>
+          <p class="font-bold text-gray-800">
+            <i class="fas fa-user text-teal-600 mr-2"></i>Uilson Alves
+          </p>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 text-gray-400 text-sm">
+        Orientador: Prof. Glauco de Figueiredo Carneiro • UFS 2025
+      </div>
+    </div>
+  </body>
+</html>
